@@ -6,8 +6,10 @@ Jon is spelled without an H;
 
 
 <h2>Useful Links</h2>
-FIRST Programming Resources: https://www.firstinspires.org/resource-library/ftc/technology-information-and-resources
-FTC Controller Github: https://github.com/FIRST-Tech-Challenge/FtcRobotController
+<ul>
+<li>FIRST Programming Resources: https://www.firstinspires.org/resource-library/ftc/technology-information-and-resources </li>
+<li>FTC Controller Github: https://github.com/FIRST-Tech-Challenge/FtcRobotController</li>
+</ul>
 
 
 hi
