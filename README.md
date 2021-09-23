@@ -1,5 +1,5 @@
 # freight-frenzy-2021-2022-
-Hossein is stupid;
+Hossein likes Subway;
 Oscar is cool;
 
 Jon is spelled without an H;
