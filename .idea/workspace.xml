@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1aa3ffba-e181-4190-80b5-32665d3b0713" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Team6168/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Team6168/lib/OpModeAnnotationProcessor.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Team6168/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/BasicOpMode_Iterative.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Team6168/src/main/res/raw/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Team6168/src/main/res/values/strings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Team6168/src/main/res/xml/teamwebcamcalibrations.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/freight-frenzy-2021-2022-.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/freight-frenzy-2021-2022-.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/A.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/Auto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/BasicOpMode_Iterative.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/teleOP.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +37,13 @@
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
