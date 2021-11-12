@@ -44,7 +44,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 @TeleOp(name="TeleOP")
-class Drive_TeleOp extends OpMode {
+public class teleOP extends OpMode {
 
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -64,7 +64,7 @@ class Drive_TeleOp extends OpMode {
 
         // Retrieve the motor objects from the hardware map. These names come from the configuration in the robot controller.
         BlMotor = hardwareMap.get(DcMotor.class, "Backleft");
-        FlMotor = hardwareMap.get(DcMotor.class, "Frontleft");
+        FlMotor = hardwareMap.get(DcMotor.class, "zFrontleft");
         BrMotor = hardwareMap.get(DcMotor.class, "Backright");
         FrMotor = hardwareMap.get(DcMotor.class, "Frontright");
         SpinnerMotor = hardwareMap.get(DcMotor.class, "OandH");
