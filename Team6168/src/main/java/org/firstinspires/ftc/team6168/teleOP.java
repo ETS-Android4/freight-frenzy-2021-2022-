@@ -64,7 +64,7 @@ public class teleOP extends OpMode {
 
         // Retrieve the motor objects from the hardware map. These names come from the configuration in the robot controller.
         BlMotor = hardwareMap.get(DcMotor.class, "Backleft");
-        FlMotor = hardwareMap.get(DcMotor.class, "zFrontleft");
+        FlMotor = hardwareMap.get(DcMotor.class, "Frontleft");
         BrMotor = hardwareMap.get(DcMotor.class, "Backright");
         FrMotor = hardwareMap.get(DcMotor.class, "Frontright");
         SpinnerMotor = hardwareMap.get(DcMotor.class, "OandH");
@@ -92,10 +92,10 @@ public class teleOP extends OpMode {
         FrMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         SpinnerMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        FlMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BlMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        FrMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FlMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BrMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FrMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         SpinnerMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         FlMotor.setPower(0);
@@ -131,13 +131,13 @@ public class teleOP extends OpMode {
 
 
         //Carosel Spinner Code
-        if (gamepad2.x) {
+        if (gamepad2.left_bumper) {
             SpinnerMotor.setPower(1);
         }else {
             SpinnerMotor.setPower(0);
         }
 
-        if (gamepad2.b) {
+        if (gamepad2.right_bumper) {
             SpinnerMotor.setPower(1);
         }else {
             SpinnerMotor.setPower(0);
