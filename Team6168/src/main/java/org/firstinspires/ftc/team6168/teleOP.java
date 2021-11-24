@@ -30,7 +30,7 @@ public class teleOP extends OpMode {
 
     public Servo Grabber;
 
-
+//CHEESE BORGIUR
 
     @Override
     public void init() {
@@ -43,7 +43,7 @@ public class teleOP extends OpMode {
         FlMotor = hardwareMap.get(DcMotor.class, "Frontleft");
         BrMotor = hardwareMap.get(DcMotor.class, "Backright");
         FrMotor = hardwareMap.get(DcMotor.class, "Frontright");
-        SpinnerMotor = hardwareMap.get(DcMotor.class, "OandH");
+        SpinnerMotor = hardwareMap.get(DcMotor.class, "Car");
         InandOut = hardwareMap.get(DcMotor.class, "InandOut");
         UpandDown = hardwareMap.get(DcMotor.class, "UpandDown");
         Grabber = hardwareMap.get(Servo.class, "Grabber");
@@ -91,8 +91,6 @@ public class teleOP extends OpMode {
         UpandDown.setPower(0);
 
 
-
-
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -116,27 +114,14 @@ public class teleOP extends OpMode {
         BrMotor.setPower(primaryDiagonalSpeed + rotation);
 
 
-
-        //Carosel Spinner Code Blue
+        //Carosel Spinner Code
         if (gamepad2.left_bumper) {
             SpinnerMotor.setPower(1);
         }else {
             SpinnerMotor.setPower(0);
         }
+
         if (gamepad2.right_bumper) {
-            SpinnerMotor.setPower(1);
-        }else {
-            SpinnerMotor.setPower(0);
-        }
-
-
-        //Carosel Spinner Code Red
-        if (gamepad2.left_trigger >=.75) {
-            SpinnerMotor.setPower(-1);
-        }else {
-            SpinnerMotor.setPower(0);
-        }
-        if (gamepad2.right_trigger >=.75) {
             SpinnerMotor.setPower(-1);
         }else {
             SpinnerMotor.setPower(0);
@@ -145,41 +130,42 @@ public class teleOP extends OpMode {
 
         //Grabber Code
         if (gamepad2.dpad_left) {
-            SpinnerMotor.setPower(1);
-        }else {
-            SpinnerMotor.setPower(0);
+            Grabber.setPosition(1);
+        } else {
+            Grabber.setPosition(0);
         }
+
         if (gamepad2.dpad_right) {
-            SpinnerMotor.setPower(-1);
-        }else {
-            SpinnerMotor.setPower(0);
+            Grabber.setPosition(-1);
+        } else {
+            Grabber.setPosition(0);
         }
+
 
         //InandOut Code
         if (gamepad2.right_stick_x >= 0.3) {
-            SpinnerMotor.setPower(1);
-        }else {
-            SpinnerMotor.setPower(0);
+            InandOut.setPower(1);
+        } else {
+            InandOut.setPower(0);
         }
         if (gamepad2.right_stick_x >= -0.3) {
-            SpinnerMotor.setPower(-1);
-        }else {
-            SpinnerMotor.setPower(0);
+            InandOut.setPower(-1);
+        } else {
+            InandOut.setPower(0);
         }
 
         //UpandDown Code
         if (gamepad2.left_stick_y >= 0.3) {
-            SpinnerMotor.setPower(1);
-        }else {
-            SpinnerMotor.setPower(0);
+            UpandDown.setPower(1);
+        } else {
+            UpandDown.setPower(0);
         }
         if (gamepad2.left_stick_y >= -0.3) {
-            SpinnerMotor.setPower(-1);
-        }else {
-            SpinnerMotor.setPower(0);
+            UpandDown.setPower(-1);
+        } else {
+            UpandDown.setPower(0);
         }
 
+
+        }
     }
-
-
-}
