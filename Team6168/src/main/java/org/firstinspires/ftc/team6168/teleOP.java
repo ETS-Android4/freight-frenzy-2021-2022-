@@ -56,6 +56,7 @@ public class teleOP extends OpMode {
         SpinnerMotor.setDirection(DcMotor.Direction.FORWARD);
         InandOut.setDirection(DcMotor.Direction.FORWARD);
         UpandDown.setDirection(DcMotor.Direction.FORWARD);
+        Grabber.setDirection(Servo.Direction.FORWARD);
 
 
         BlMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -89,6 +90,7 @@ public class teleOP extends OpMode {
         SpinnerMotor.setPower(0);
         InandOut.setPower(0);
         UpandDown.setPower(0);
+        Grabber.setPosition(0);
 
 
         // Tell the driver that initialization is complete.
@@ -130,39 +132,32 @@ public class teleOP extends OpMode {
 
         //Grabber Code
         if (gamepad2.dpad_left) {
-            Grabber.setPosition(1);
-        } else {
-            Grabber.setPosition(0);
+            Grabber.setPosition(0.9);
+        } else if (gamepad2.dpad_left) {
+            Grabber.setPosition(0.5);
         }
 
         if (gamepad2.dpad_right) {
-            Grabber.setPosition(-1);
-        } else {
-            Grabber.setPosition(0);
+            Grabber.setPosition(0.1);
+        } else if (gamepad2.dpad_right){
+            Grabber.setPosition(0.5);
         }
-
 
         //InandOut Code
-        if (gamepad2.right_stick_x >= 0.3) {
-            InandOut.setPower(1);
-        } else {
-            InandOut.setPower(0);
-        }
-        if (gamepad2.right_stick_x >= -0.3) {
-            InandOut.setPower(-1);
-        } else {
+        if (gamepad2.right_stick_y >= 0.3) {
+            InandOut.setPower(0.9);
+        } else if (gamepad2.right_stick_y <= -0.3) {
+            InandOut.setPower(-0.9);
+        }else{
             InandOut.setPower(0);
         }
 
-        //UpandDown Code
+        //UpandDown
         if (gamepad2.left_stick_y >= 0.3) {
-            UpandDown.setPower(1);
-        } else {
-            UpandDown.setPower(0);
-        }
-        if (gamepad2.left_stick_y >= -0.3) {
-            UpandDown.setPower(-1);
-        } else {
+            UpandDown.setPower(0.9);
+        } else if (gamepad2.left_stick_y <= -0.3) {
+            UpandDown.setPower(-0.9);
+        }else{
             UpandDown.setPower(0);
         }
 
