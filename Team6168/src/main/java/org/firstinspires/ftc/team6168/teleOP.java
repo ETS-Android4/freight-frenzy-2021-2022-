@@ -13,8 +13,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 
-
-
 @TeleOp(name="TeleOP")
 public class teleOP extends OpMode {
 
@@ -30,7 +28,6 @@ public class teleOP extends OpMode {
 
     public Servo Grabber;
 
-//CHEESE BORGIUR
 
     @Override
     public void init() {
@@ -63,7 +60,6 @@ public class teleOP extends OpMode {
         FlMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         BrMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         FrMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        SpinnerMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         InandOut.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         UpandDown.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
@@ -71,7 +67,6 @@ public class teleOP extends OpMode {
         FlMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         BrMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         FrMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        SpinnerMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         InandOut.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         UpandDown.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
@@ -79,7 +74,6 @@ public class teleOP extends OpMode {
         FlMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BrMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FrMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        SpinnerMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         InandOut.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         UpandDown.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -90,7 +84,7 @@ public class teleOP extends OpMode {
         SpinnerMotor.setPower(0);
         InandOut.setPower(0);
         UpandDown.setPower(0);
-        Grabber.setPosition(0);
+        Grabber.setPosition(1);
 
 
         // Tell the driver that initialization is complete.
@@ -132,21 +126,26 @@ public class teleOP extends OpMode {
 
         //Grabber Code
         if (gamepad2.dpad_left) {
-            Grabber.setPosition(0.9);
-        } else if (gamepad2.dpad_left) {
-            Grabber.setPosition(0.5);
-        }
+            Grabber.setPosition(1);
 
-        if (gamepad2.dpad_right) {
-            Grabber.setPosition(0.1);
-        } else if (gamepad2.dpad_right){
-            Grabber.setPosition(0.5);
+            telemetry.addData("LEFT","");
+            telemetry.update();
+        } else if (gamepad2.dpad_right) {
+            Grabber.setPosition(-1);
+
+            telemetry.addData("RIGHT","");
+            telemetry.update();
+        } else {
+            Grabber.setPosition(0);
+
+            telemetry.addData("ZERO","");
+            telemetry.update();
         }
 
         //InandOut Code
-        if (gamepad2.right_stick_y >= 0.3) {
+        if (gamepad2.right_stick_x >= 0.3) {
             InandOut.setPower(0.9);
-        } else if (gamepad2.right_stick_y <= -0.3) {
+        } else if (gamepad2.right_stick_x <= -0.3) {
             InandOut.setPower(-0.9);
         }else{
             InandOut.setPower(0);
@@ -160,7 +159,5 @@ public class teleOP extends OpMode {
         }else{
             UpandDown.setPower(0);
         }
-
-
         }
     }
