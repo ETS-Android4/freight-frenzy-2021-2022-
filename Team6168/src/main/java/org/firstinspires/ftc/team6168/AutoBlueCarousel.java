@@ -14,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 @Autonomous(name="myAuto", group="chad")
-public class BlueAutoCarousel extends LinearOpMode {
+public class AutoBlueCarousel extends LinearOpMode {
 
     DcMotor frontleft;
     DcMotor frontright;
