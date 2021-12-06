@@ -18,10 +18,10 @@ public class teleOP extends OpMode {
 
 
     private ElapsedTime runtime = new ElapsedTime();
-    public DcMotor FlMotor;
-    public DcMotor BlMotor;
-    public DcMotor FrMotor;
-    public DcMotor BrMotor;
+    public DcMotor backleft;
+    public DcMotor frontleft;
+    public DcMotor backright;
+    public DcMotor frontright;
     public DcMotor SpinnerMotor;
     public DcMotor InandOut;
     public DcMotor UpandDown;
@@ -36,51 +36,51 @@ public class teleOP extends OpMode {
         telemetry.update();
 
         //Hardware map
-        BlMotor = hardwareMap.get(DcMotor.class, "Backleft");
-        FlMotor = hardwareMap.get(DcMotor.class, "Frontleft");
-        BrMotor = hardwareMap.get(DcMotor.class, "Backright");
-        FrMotor = hardwareMap.get(DcMotor.class, "Frontright");
+        backleft = hardwareMap.get(DcMotor.class, "Backleft");
+        frontleft = hardwareMap.get(DcMotor.class, "Frontleft");
+        backright = hardwareMap.get(DcMotor.class, "Backright");
+        frontright = hardwareMap.get(DcMotor.class, "Frontright");
         SpinnerMotor = hardwareMap.get(DcMotor.class, "Car");
         InandOut = hardwareMap.get(DcMotor.class, "InandOut");
         UpandDown = hardwareMap.get(DcMotor.class, "UpandDown");
         Grabber = hardwareMap.get(Servo.class, "Grabber");
 
 
-        BlMotor.setDirection(DcMotor.Direction.FORWARD);
-        FlMotor.setDirection(DcMotor.Direction.FORWARD);
-        BrMotor.setDirection(DcMotor.Direction.REVERSE);
-        FrMotor.setDirection(DcMotor.Direction.REVERSE);
+        backleft.setDirection(DcMotor.Direction.FORWARD);
+        frontleft.setDirection(DcMotor.Direction.FORWARD);
+        backright.setDirection(DcMotor.Direction.REVERSE);
+        frontright.setDirection(DcMotor.Direction.REVERSE);
         SpinnerMotor.setDirection(DcMotor.Direction.FORWARD);
         InandOut.setDirection(DcMotor.Direction.FORWARD);
         UpandDown.setDirection(DcMotor.Direction.FORWARD);
         Grabber.setDirection(Servo.Direction.FORWARD);
 
 
-        BlMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        FlMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BrMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        FrMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backleft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontleft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backright.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontright.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         InandOut.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         UpandDown.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        BlMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        FlMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        BrMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        FrMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         InandOut.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         UpandDown.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        BlMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        FlMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        BrMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        FrMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         InandOut.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         UpandDown.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        BlMotor.setPower(0);
-        FlMotor.setPower(0);
-        BrMotor.setPower(0);
-        FrMotor.setPower(0);
+        backleft.setPower(0);
+        frontleft.setPower(0);
+        backright.setPower(0);
+        frontright.setPower(0);
         SpinnerMotor.setPower(0);
         InandOut.setPower(0);
         UpandDown.setPower(0);
@@ -104,10 +104,10 @@ public class teleOP extends OpMode {
         float primaryDiagonalSpeed = (float) (speed * Math.sin(angle - (Math.PI / 4.0)));
         float secondaryDiagonalSpeed = (float) (speed * Math.cos(angle - (Math.PI / 4.0)));
 
-        BlMotor.setPower(secondaryDiagonalSpeed - rotation);
-        FrMotor.setPower(secondaryDiagonalSpeed + rotation);
-        FlMotor.setPower(primaryDiagonalSpeed - rotation);
-        BrMotor.setPower(primaryDiagonalSpeed + rotation);
+        backleft.setPower(secondaryDiagonalSpeed - rotation);
+        frontleft.setPower(secondaryDiagonalSpeed + rotation);
+        backright.setPower(primaryDiagonalSpeed - rotation);
+        frontright.setPower(primaryDiagonalSpeed + rotation);
 
 
         //Carosel Spinner Code
@@ -127,19 +127,10 @@ public class teleOP extends OpMode {
         //Grabber Code
         if (gamepad2.dpad_left) {
             Grabber.setPosition(1);
-
-            telemetry.addData("LEFT","");
-            telemetry.update();
         } else if (gamepad2.dpad_right) {
             Grabber.setPosition(-1);
-
-            telemetry.addData("RIGHT","");
-            telemetry.update();
         } else {
             Grabber.setPosition(0);
-
-            telemetry.addData("ZERO","");
-            telemetry.update();
         }
 
         //InandOut Code

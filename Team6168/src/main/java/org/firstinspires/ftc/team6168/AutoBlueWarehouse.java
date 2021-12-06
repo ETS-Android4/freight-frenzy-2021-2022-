@@ -40,10 +40,10 @@ public class AutoBlueWarehouse extends LinearOpMode {
         //
         initGyro();
         //
-        frontleft = hardwareMap.dcMotor.get("frontleft");
-        frontright = hardwareMap.dcMotor.get("frontright");
-        backleft = hardwareMap.dcMotor.get("backleft");
-        backright = hardwareMap.dcMotor.get("backright");
+        frontleft = hardwareMap.dcMotor.get("Frontleft");
+        frontright = hardwareMap.dcMotor.get("Frontright");
+        backleft = hardwareMap.dcMotor.get("Backleft");
+        backright = hardwareMap.dcMotor.get("Backright");
 
         frontright.setDirection(DcMotorSimple.Direction.REVERSE);
         backright.setDirection(DcMotorSimple.Direction.REVERSE);
