@@ -5,16 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1aa3ffba-e181-4190-80b5-32665d3b0713" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/AutoBlueCarousel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/AutoBlueCarousel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/AutoBlueWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/AutoBlueWarehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/teleOP.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/teleOP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\libren\.android\avd\Pixel_3a_API_30_x86.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[4315Q2U9R9]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -29,6 +27,22 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="freight-frenzy-2021-2022-" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="freight-frenzy-2021-2022-" type="f1a62948:ProjectNode" />
+                <item name="FtcRobotController" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="freight-frenzy-2021-2022-" type="f1a62948:ProjectNode" />
+                <item name="FtcRobotController" type="2d1252cf:ModuleNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="freight-frenzy-2021-2022-" type="f1a62948:ProjectNode" />
+                <item name="Team6168" type="2d1252cf:ModuleNode" />
               </path>
             </expand>
             <select />
