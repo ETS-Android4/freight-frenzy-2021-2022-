@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="myAuto", group="chad")
+@Autonomous(name="AutoBlueWarehouse", group="chad")
 public class AutoBlueWarehouse extends LinearOpMode {
     //
     DcMotor frontleft;

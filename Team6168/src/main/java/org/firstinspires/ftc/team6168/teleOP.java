@@ -105,10 +105,10 @@ public class teleOP extends OpMode {
 
 
         double speedMode = 1;
-        if (gamepad1.a == true) {
-            double speedMode = .2;
+        if (gamepad1.right_bumper == true) {
+            speedMode = .4;
         } else if (gamepad1.b == true) {
-            double speedMode = 1;
+            speedMode = 1;
         }
 
         double forward = speedMode * Math.pow(gamepad1.left_stick_y, 3);
