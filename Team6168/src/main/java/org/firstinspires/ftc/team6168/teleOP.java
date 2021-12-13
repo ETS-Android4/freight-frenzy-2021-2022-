@@ -28,6 +28,8 @@ public class teleOP extends OpMode {
 
     public Servo Grabber;
 
+    public double speedMode = 1;
+
 
     @Override
     public void init() {
@@ -87,27 +89,90 @@ public class teleOP extends OpMode {
         Grabber.setPosition(1);
 
 
+
+
+
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
         telemetry.update();
+
     }
 
 
     @Override
     public void loop() {
 
+        //Slow Mode Code for a and b keys
+        if (gamepad1.a == true) {
+            speedMode = .4;
+        } else if (gamepad1.b == true) {
+            speedMode = 1;
+        }
+
+        //Slow Mode Code for bumpers
+        if (gamepad1.right_bumper == true) {
+            speedMode -= .2;
+        } else if (gamepad1.right_trigger >= .5) {
+            speedMode += .2;
+        }
+
+        double stopBuffer = 0; //Not currently Implemented
+
         //Drive Train Code
-        double speed = Math.sqrt(2) * Math.pow(Math.pow(gamepad1.left_stick_x, 4) + Math.pow(-gamepad1.left_stick_y, 4), 0.5);
-        double angle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x);
-        double rotation = Math.signum(gamepad1.right_stick_x) * Math.pow(gamepad1.right_stick_x, 2);
+        double forward = speedMode * Math.pow(gamepad1.left_stick_y, 3);
+        double right = -speedMode * Math.pow(gamepad1.left_stick_x, 3);
+        double turn = -speedMode * Math.pow(gamepad1.right_stick_x,3);
 
-        float primaryDiagonalSpeed = (float) (speed * Math.sin(angle - (Math.PI / 4.0)));
-        float secondaryDiagonalSpeed = (float) (speed * Math.cos(angle - (Math.PI / 4.0)));
+        double leftFrontPower = forward + right + turn;
+        double leftBackPower = forward - right + turn;
+        double rightFrontPower = forward - right - turn;
+        double rightBackPower = forward + right - turn;
+        double[] powers = {leftFrontPower, leftBackPower, rightFrontPower, rightBackPower};
 
-        backleft.setPower(secondaryDiagonalSpeed - rotation);
-        frontleft.setPower(secondaryDiagonalSpeed + rotation);
-        backright.setPower(primaryDiagonalSpeed - rotation);
-        frontright.setPower(primaryDiagonalSpeed + rotation);
+        boolean needToScale = false;
+        for (double power : powers){
+            if(Math.abs(power) > 1){
+                needToScale = true;
+                break;
+            }
+        }
+        if (needToScale){
+            double greatest = 0;
+            for (double power : powers){
+                if (Math.abs(power) > greatest){
+                    greatest = Math.abs(power);
+                }
+            }
+            leftFrontPower /= greatest;
+            leftBackPower /= greatest;
+            rightFrontPower /= greatest;
+            rightBackPower /= greatest;
+        }
+
+        boolean stop = true;
+        for (double power : powers){
+            if (Math.abs(power) > stopBuffer){
+                stop = false;
+                break;
+            }
+        }
+        if (stop){
+            leftFrontPower = 0;
+            leftBackPower = 0;
+            rightFrontPower = 0;
+            rightBackPower = 0;
+        }
+
+        frontleft.setPower(leftFrontPower);
+        //base().getTelemetry().addData("Setting frontLeft power to " , leftFrontPower);
+        backleft.setPower(leftBackPower);
+        //base().getTelemetry().addData("Setting backLeft power to " , leftBackPower);
+
+        frontright.setPower(rightFrontPower);
+        //base().getTelemetry().addData("Setting frontRight power to " , rightFrontPower);
+
+        backright.setPower(rightBackPower);
+        //base().getTelemetry().addData("Setting rightBack power to " , rightBackPower);
 
 
         //Carosel Spinner Code
@@ -128,9 +193,9 @@ public class teleOP extends OpMode {
         if (gamepad2.dpad_left) {
             Grabber.setPosition(1);
         } else if (gamepad2.dpad_right) {
-            Grabber.setPosition(-1);
+            Grabber.setPosition(.5);
         } else {
-            Grabber.setPosition(0);
+            //Grabber.setPosition(.5);  //If uncommented, this will make it so you need to hold down the grabber button to keep the grabber closed
         }
 
         //InandOut Code
@@ -150,5 +215,9 @@ public class teleOP extends OpMode {
         }else{
             UpandDown.setPower(0);
         }
+
+
         }
+
+
     }
