@@ -74,17 +74,20 @@ public class AutoBlueCarousel extends LinearOpMode {
         telemetry.update();
         waitForStartify();
 
-        strafeToPosition(-2.1,DRIVE_SPEED);
+        Utilities.strafeToPosition(-2.1,DRIVE_SPEED);
 
         gyroDrive(.2,10,10,10,10,0);
 
         sleep(500);
 
-        Spinner.setPower(1);
+        Spinner.setPower(.7);
         sleep(4000);
         Spinner.setPower(0);
 
-        strafeToPosition(-10,DRIVE_SPEED);
+        strafeToPosition(-16,DRIVE_SPEED);
+
+        gyroDrive(.2,2,2,2,2,0);
+
 
 
 
@@ -95,50 +98,8 @@ public class AutoBlueCarousel extends LinearOpMode {
 
 
     }
-    //
-    /*
-    This function's purpose is simply to drive forward or backward.
-    To drive backward, simply make the inches input negative.
-     */
-    public void moveToPosition(double inches, double speed){
-        //
-        int move = (int)(Math.round(inches*conversion));
-        //
-        backleft.setTargetPosition(backleft.getCurrentPosition() + move);
-        frontleft.setTargetPosition(frontleft.getCurrentPosition() + move);
-        backright.setTargetPosition(backright.getCurrentPosition() + move);
-        frontright.setTargetPosition(frontright.getCurrentPosition() + move);
-        //
-        frontleft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontright.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backleft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backright.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        //
-        frontleft.setPower(speed);
-        backleft.setPower(speed);
-        frontright.setPower(speed);
-        backright.setPower(speed);
-        //
-        while (frontleft.isBusy() && frontright.isBusy() && backleft.isBusy() && backright.isBusy()){
-            if (exit){
-                frontright.setPower(0);
-                frontleft.setPower(0);
-                backright.setPower(0);
-                backleft.setPower(0);
-                return;
-            }
-        }
-        frontright.setPower(0);
-        frontleft.setPower(0);
-        backright.setPower(0);
-        backleft.setPower(0);
-        return;
-    }
-    //
-    /*
-    This function uses the Expansion Hub IMU Integrated Gyro to turn a precise number of degrees (+/- 5).
-    Degrees should always be positive, make speedDirection negative to turn left.
-     */
+
+    
     public void turnWithGyro(double degrees, double speedDirection){
         //<editor-fold desc="Initialize">
         angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);

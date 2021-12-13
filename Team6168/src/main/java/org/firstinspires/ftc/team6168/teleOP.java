@@ -110,10 +110,10 @@ public class teleOP extends OpMode {
         }
 
         //Slow Mode Code for bumpers
-        if (gamepad1.right_bumper == true) {
-            speedMode -= .2;
-        } else if (gamepad1.right_trigger >= .5) {
-            speedMode += .2;
+        if (gamepad1.right_bumper == true && speedMode > .2) {
+            speedMode -= .05;
+        } else if (gamepad1.right_trigger >= .5 && speedMode < 2) {
+            speedMode += .05;
         }
 
         double stopBuffer = 0; //Not currently Implemented
