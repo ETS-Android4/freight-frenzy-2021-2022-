@@ -28,6 +28,8 @@ public class teleOP extends OpMode {
 
     public Servo Grabber;
 
+    public double speedMode = 1;
+
 
     @Override
     public void init() {
@@ -100,17 +102,23 @@ public class teleOP extends OpMode {
     @Override
     public void loop() {
 
-        //Drive Train Code
-        double stopBuffer = 0;
-
-
-        double speedMode = 1;
-        if (gamepad1.right_bumper == true) {
+        //Slow Mode Code for a and b keys
+        if (gamepad1.a == true) {
             speedMode = .4;
         } else if (gamepad1.b == true) {
             speedMode = 1;
         }
 
+        //Slow Mode Code for bumpers
+        if (gamepad1.right_bumper == true) {
+            speedMode -= .2;
+        } else if (gamepad1.right_trigger >= .5) {
+            speedMode += .2;
+        }
+
+        double stopBuffer = 0; //Not currently Implemented
+
+        //Drive Train Code
         double forward = speedMode * Math.pow(gamepad1.left_stick_y, 3);
         double right = -speedMode * Math.pow(gamepad1.left_stick_x, 3);
         double turn = -speedMode * Math.pow(gamepad1.right_stick_x,3);
@@ -187,7 +195,7 @@ public class teleOP extends OpMode {
         } else if (gamepad2.dpad_right) {
             Grabber.setPosition(.5);
         } else {
-            //Grabber.setPosition(.5);
+            //Grabber.setPosition(.5);  //If uncommented, this will make it so you need to hold down the grabber button to keep the grabber closed
         }
 
         //InandOut Code
