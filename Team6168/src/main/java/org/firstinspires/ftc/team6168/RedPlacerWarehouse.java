@@ -42,7 +42,7 @@ public class RedPlacerWarehouse extends LinearOpMode {
     Double cpi = (cpr * gearratio)/(Math.PI * diameter); //counts per inch, 28cpr * gear ratio / (2 * pi * diameter (in inches, in the center))
     Double bias = 0.8;//default 0.8
     Double meccyBias = 0.9;//change to adjust only strafing movement
-    double amountError = 2;
+
 
     static final double HEADING_THRESHOLD = 1;      // As tight as we can make it with an integer gyro
     static final double P_TURN_COEFF = 0.1;     // Larger is more responsive, but also less stable
@@ -69,6 +69,7 @@ public class RedPlacerWarehouse extends LinearOpMode {
         InandOut = hardwareMap.get(DcMotor.class, "InandOut");
         UpandDown = hardwareMap.get(DcMotor.class, "UpandDown");
         DcMotor[] motors = {frontleft, frontright, backleft, backright};
+
         Spinner = hardwareMap.dcMotor.get("Car");
         gyro = hardwareMap.get(ModernRoboticsI2cGyro.class, "Gyro");
         grabber = hardwareMap.get(Servo.class, "Grabber");
@@ -88,17 +89,17 @@ public class RedPlacerWarehouse extends LinearOpMode {
 
         waitForStart();
 
-        strafeToPosition(2,.2);
-//
-//        gyroDrive(DRIVE_SPEED,20,20,20,20,0);
-//
-//        liftup(15,.3);
-//
-//        liftout(8,.3);
-//
-//        drop();
-//
-//        gyroDrive(DRIVE_SPEED,-20,-20,-20,-20,0);
+        Utilities.strafeToPosition(motors,2,.2);
+
+        Utilities.gyroDrive(motors, DRIVE_SPEED,20,20,20,20,0, opModeIsActive());
+
+        liftup(15,.3);
+
+        liftout(8,.3);
+
+        drop();
+
+        Utilities.gyroDrive(motors, DRIVE_SPEED,-20,-20,-20,-20,0, opModeIsActive());
 
 
 
@@ -244,7 +245,7 @@ public class RedPlacerWarehouse extends LinearOpMode {
     This function uses the encoders to strafe left or right.
     Negative input for inches results in left strafing.
      */
-    public void strafeToPosition(double inches, double speed){
+    public void strafeToPosition(DcMotor[] motors, double inches, double speed){
         //
         int move = (int)(Math.round(inches * cpi * meccyBias));
         //
@@ -391,8 +392,8 @@ public class RedPlacerWarehouse extends LinearOpMode {
 
 
                 // adjust relative speed based on heading error.
-                error = getError(angle);
-                steer = getSteer(error, P_DRIVE_COEFF);
+                error = Utilities.getError(angle);
+                steer = Utilities.getSteer(error, P_DRIVE_COEFF, speed);
 
                 // if driving in reverse, the motor correction also needs to be reversed
                 if (frontLeftInches < 0 && frontRightInches < 0 && backLeftInches < 0 && backRightInches < 0)
@@ -430,9 +431,7 @@ public class RedPlacerWarehouse extends LinearOpMode {
                         + (Math.abs(((newFrontLeftTarget) - (frontleft.getCurrentPosition()))))
                         + (Math.abs((newBackRightTarget) - (backright.getCurrentPosition())))
                         + (Math.abs(((newFrontRightTarget) - (frontright.getCurrentPosition()))))) / cpi);
-                if (ErrorAmount < amountError) {
-                    goodEnough = true;
-                }
+
             }
 
             // Stop all motion;
@@ -516,7 +515,7 @@ public class RedPlacerWarehouse extends LinearOpMode {
         double rightSpeed;
 
         // determine turn power based on +/- error
-        error = getError(angle);
+        error = Utilities.getError(angle);
 
         if (Math.abs(error) <= HEADING_THRESHOLD) {
             steer = 0.0;
@@ -524,7 +523,7 @@ public class RedPlacerWarehouse extends LinearOpMode {
             rightSpeed = 0.0;
             onTarget = true;
         } else {
-            steer = getSteer(error, PCoeff);
+            steer = Utilities.getSteer(error, PCoeff, speed);
             rightSpeed = speed * steer;
             leftSpeed = -rightSpeed;
         }
@@ -543,30 +542,5 @@ public class RedPlacerWarehouse extends LinearOpMode {
         return onTarget;
     }
 
-    /**
-     * getError determines the error between the target angle and the robot's current heading
-     * @param   targetAngle  Desired angle (relative to global reference established at last Gyro Reset).
-     * @return error angle: Degrees in the range +/- 180. Centered on the robot's frame of reference
-     *          +ve error means the robot should turn LEFT (CCW) to reduce error.
-     */
-    public double getError ( double targetAngle){
 
-        double robotError;
-
-        // calculate error in -179 to +180 range  (
-        robotError = targetAngle - gyro.getHeading();
-        while (robotError > 180) robotError -= 360;
-        while (robotError <= -180) robotError += 360;
-        return -robotError;
-    }
-
-    /**
-     * returns desired steering force.  +/- 1 range.  +ve = steer left
-     * @param error   Error angle in robot relative degrees
-     * @param PCoeff  Proportional Gain Coefficient
-     * @return
-     */
-    public double getSteer ( double error, double PCoeff){
-        return Range.clip(error * PCoeff, -DRIVE_SPEED, 1);
-    }
 }
