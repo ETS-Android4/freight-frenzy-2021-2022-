@@ -59,6 +59,7 @@ public class AutoBlueCarousel extends LinearOpMode {
         frontright = hardwareMap.dcMotor.get("Frontright");
         backleft = hardwareMap.dcMotor.get("Backleft");
         backright = hardwareMap.dcMotor.get("Backright");
+        DcMotor[] motors = {frontleft, frontright, backleft, backright};
         Spinner = hardwareMap.dcMotor.get("Car");
         gyro = hardwareMap.get(ModernRoboticsI2cGyro.class, "Gyro");
 
@@ -74,7 +75,7 @@ public class AutoBlueCarousel extends LinearOpMode {
         telemetry.update();
         waitForStartify();
 
-        Utilities.strafeToPosition(-2.1,DRIVE_SPEED);
+        strafeToPosition(-2.1,DRIVE_SPEED);
 
         gyroDrive(.2,10,10,10,10,0);
 
@@ -87,15 +88,6 @@ public class AutoBlueCarousel extends LinearOpMode {
         strafeToPosition(-16,DRIVE_SPEED);
 
         gyroDrive(.2,2,2,2,2,0);
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -537,5 +529,4 @@ public class AutoBlueCarousel extends LinearOpMode {
     public double getSteer ( double error, double PCoeff){
         return Range.clip(error * PCoeff, -DRIVE_SPEED, 1);
     }
-    //
 }

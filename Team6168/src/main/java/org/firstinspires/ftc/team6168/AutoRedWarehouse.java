@@ -10,19 +10,21 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="AutoBlueWarehouse", group="chad")
-public class AutoBlueWarehouse extends LinearOpMode {
-
+@Autonomous(name="AutoRedWarehouse", group="chad")
+public class AutoRedWarehouse extends LinearOpMode {
+    //
     DcMotor frontleft;
     DcMotor frontright;
     DcMotor backleft;
     DcMotor backright;
+    DcMotor Spinner;
 
     ModernRoboticsI2cGyro gyro;
     //28 * 20 / (2ppi * 4.125)
@@ -30,7 +32,7 @@ public class AutoBlueWarehouse extends LinearOpMode {
     Integer cpr = 28; //counts per rotation
     Integer gearratio = 40;
     Double diameter = 4.125;
-    Double cpi = (cpr * gearratio) / (Math.PI * diameter); //counts per inch, 28cpr * gear ratio / (2 * pi * diameter (in inches, in the center))
+    Double cpi = (cpr * gearratio)/(Math.PI * diameter); //counts per inch, 28cpr * gear ratio / (2 * pi * diameter (in inches, in the center))
     Double bias = 0.8;//default 0.8
     Double meccyBias = 0.9;//change to adjust only strafing movement
     double amountError = 2;
@@ -41,24 +43,24 @@ public class AutoBlueWarehouse extends LinearOpMode {
 
     double DRIVE_SPEED = 0.2;
     double TURN_SPEED = 0.2;
-
+    //
     Double conversion = cpi * bias;
     Boolean exit = false;
-
+    //
     BNO055IMU imu;
     Orientation angles;
     Acceleration gravity;
-
-    public void runOpMode() {
-
+    //
+    public void runOpMode(){
         //
-        Utilities.initGyro();
+        initGyro();
         //
         frontleft = hardwareMap.dcMotor.get("Frontleft");
         frontright = hardwareMap.dcMotor.get("Frontright");
         backleft = hardwareMap.dcMotor.get("Backleft");
         backright = hardwareMap.dcMotor.get("Backright");
         DcMotor[] motors = {frontleft, frontright, backleft, backright};
+        Spinner = hardwareMap.dcMotor.get("Car");
         gyro = hardwareMap.get(ModernRoboticsI2cGyro.class, "Gyro");
 
         frontright.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -77,7 +79,6 @@ public class AutoBlueWarehouse extends LinearOpMode {
 
 
     }
-
 
 
     public void turnWithGyro(double degrees, double speedDirection){
