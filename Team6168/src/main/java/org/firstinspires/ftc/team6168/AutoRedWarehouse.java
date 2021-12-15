@@ -17,7 +17,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="AutoRedWarehouse", group="chad")
+@Autonomous(name="AutoRedWarehouse")
 public class AutoRedWarehouse extends LinearOpMode {
     //
     DcMotor frontleft;
@@ -75,7 +75,7 @@ public class AutoRedWarehouse extends LinearOpMode {
         telemetry.update();
         waitForStart();
 
-        gyroDrive(.2, 20, 20, 20, 20, 0);
+        gyroDrive(DRIVE_SPEED, 20, 20, 20, 20, 0);
 
 
     }

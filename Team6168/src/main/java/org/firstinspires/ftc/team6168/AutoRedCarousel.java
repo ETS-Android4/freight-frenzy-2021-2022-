@@ -17,7 +17,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="AutoRedCarousel", group="chad")
+@Autonomous(name="AutoRedCarousel")
 public class AutoRedCarousel extends LinearOpMode {
     //
     DcMotor frontleft;
@@ -77,7 +77,7 @@ public class AutoRedCarousel extends LinearOpMode {
 
         strafeToPosition(3,DRIVE_SPEED);
 
-        gyroDrive(.2,9.7,9.7,9.7,9.7,0);
+        gyroDrive(DRIVE_SPEED,9.7,9.7,9.7,9.7,0);
 
         Spinner.setPower(-.7);
         sleep(4000);
@@ -85,7 +85,7 @@ public class AutoRedCarousel extends LinearOpMode {
 
         strafeToPosition(14,DRIVE_SPEED);
 
-        gyroDrive(.2,3,3,3,3,0);
+        gyroDrive(DRIVE_SPEED,3,3,3,3,0);
 
 
 

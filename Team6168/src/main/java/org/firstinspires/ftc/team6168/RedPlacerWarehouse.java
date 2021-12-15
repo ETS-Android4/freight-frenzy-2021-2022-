@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -17,16 +18,22 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="AutoBlueCarousel", group="chad")
-public class AutoBlueCarousel extends LinearOpMode {
+@Autonomous(name="RedPlacerWarehouse")
+public class RedPlacerWarehouse extends LinearOpMode {
     //
     DcMotor frontleft;
     DcMotor frontright;
     DcMotor backleft;
     DcMotor backright;
     DcMotor Spinner;
+    DcMotor InandOut;
+    DcMotor UpandDown;
+
+    Servo grabber;
 
     ModernRoboticsI2cGyro gyro;
+
+
     //28 * 20 / (2ppi * 4.125)
     Double width = 16.0; //inches
     Integer cpr = 28; //counts per rotation
@@ -43,25 +50,28 @@ public class AutoBlueCarousel extends LinearOpMode {
 
     double DRIVE_SPEED = 0.2;
     double TURN_SPEED = 0.2;
-    //
+
     Double conversion = cpi * bias;
     Boolean exit = false;
-    //
+
     BNO055IMU imu;
     Orientation angles;
     Acceleration gravity;
-    //
+
     public void runOpMode(){
-        //
+
         initGyro();
-        //
+
         frontleft = hardwareMap.dcMotor.get("Frontleft");
         frontright = hardwareMap.dcMotor.get("Frontright");
         backleft = hardwareMap.dcMotor.get("Backleft");
         backright = hardwareMap.dcMotor.get("Backright");
+        InandOut = hardwareMap.get(DcMotor.class, "InandOut");
+        UpandDown = hardwareMap.get(DcMotor.class, "UpandDown");
         DcMotor[] motors = {frontleft, frontright, backleft, backright};
         Spinner = hardwareMap.dcMotor.get("Car");
         gyro = hardwareMap.get(ModernRoboticsI2cGyro.class, "Gyro");
+        grabber = hardwareMap.get(Servo.class, "Grabber");
 
         frontright.setDirection(DcMotorSimple.Direction.REVERSE);
         backright.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -73,25 +83,53 @@ public class AutoBlueCarousel extends LinearOpMode {
         telemetry.addLine("Gyro Calibrated");
         telemetry.addData("Angle: ", gyro.getIntegratedZValue());
         telemetry.update();
-        waitForStartify();
 
-        strafeToPosition(-2.1,DRIVE_SPEED);
+        grabber.setPosition(.9);
 
-        gyroDrive(DRIVE_SPEED,10,10,10,10,0);
+        waitForStart();
 
-        sleep(500);
+        gyroDrive(DRIVE_SPEED,20,20,20,20,0);
 
-        Spinner.setPower(.7);
-        sleep(4000);
-        Spinner.setPower(0);
+        liftup(15,.3);
 
-        strafeToPosition(-16,DRIVE_SPEED);
+        liftout(8,.3);
 
-        gyroDrive(DRIVE_SPEED,2,2,2,2,0);
+        drop();
+
+        gyroDrive(DRIVE_SPEED,-20,-20,-20,-20,0);
+
+
+
 
     }
 
-    
+    public void liftup(double inches, double speed) {
+        int move =  (int)(Math.round(inches*conversion));
+        UpandDown.setTargetPosition(UpandDown.getCurrentPosition() + move);
+
+        UpandDown.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        UpandDown.setPower(speed);
+
+    }
+
+    public void liftout(double inches, double speed) {
+        int move =  (int)(Math.round(inches*conversion));
+        UpandDown.setTargetPosition(UpandDown.getCurrentPosition() + move);
+
+        UpandDown.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        UpandDown.setPower(speed);
+
+    }
+
+    public void drop(){
+        grabber.setPosition(.5);
+    }
+
+
+
+
     public void turnWithGyro(double degrees, double speedDirection){
         //<editor-fold desc="Initialize">
         angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
@@ -416,7 +454,7 @@ public class AutoBlueCarousel extends LinearOpMode {
         // keep looping while we are still active, and not on heading.
         while (opModeIsActive() && !onHeading(speed, angle, P_TURN_COEFF)) {
             // Update telemetry & Allow time for other processes to run.
-           telemetry.update();
+            telemetry.update();
         }
         frontleft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backleft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
