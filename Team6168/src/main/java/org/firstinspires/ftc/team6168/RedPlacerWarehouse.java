@@ -88,15 +88,17 @@ public class RedPlacerWarehouse extends LinearOpMode {
 
         waitForStart();
 
-        gyroDrive(DRIVE_SPEED,20,20,20,20,0);
-
-        liftup(15,.3);
-
-        liftout(8,.3);
-
-        drop();
-
-        gyroDrive(DRIVE_SPEED,-20,-20,-20,-20,0);
+        strafeToPosition(2,.2);
+//
+//        gyroDrive(DRIVE_SPEED,20,20,20,20,0);
+//
+//        liftup(15,.3);
+//
+//        liftout(8,.3);
+//
+//        drop();
+//
+//        gyroDrive(DRIVE_SPEED,-20,-20,-20,-20,0);
 
 
 

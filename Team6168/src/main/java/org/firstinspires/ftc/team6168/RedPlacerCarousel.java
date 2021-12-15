@@ -89,7 +89,7 @@ public class RedPlacerCarousel extends LinearOpMode {
 
         strafeToPosition(3,DRIVE_SPEED);
 
-        gyroDrive(DRIVE_SPEED,9.7,9.7,9.7,9.7,0);
+        Utilities.gyroDrive(motors, DRIVE_SPEED,9.7,9.7,9.7,9.7,0);
 
         Spinner.setPower(-.7);
         sleep(4000);
@@ -97,7 +97,7 @@ public class RedPlacerCarousel extends LinearOpMode {
 
         strafeToPosition(14,DRIVE_SPEED);
 
-        gyroDrive(DRIVE_SPEED,-15,-15,-15,-15,0);
+        Utilities.gyroDrive(motors, DRIVE_SPEED,-15,-15,-15,-15,0);
 
         liftup(15,.3);
 
@@ -105,7 +105,7 @@ public class RedPlacerCarousel extends LinearOpMode {
 
         drop();
 
-        gyroDrive(DRIVE_SPEED,-15,-15,-15,-15,0);
+        Utilities.gyroDrive(motors, DRIVE_SPEED,-15,-15,-15,-15,0);
 
 
 
@@ -338,7 +338,7 @@ public class RedPlacerCarousel extends LinearOpMode {
         backright.setPower(-input);
     }
 
-    public void gyroDrive(double speed,
+    public void gyroDrive(DcMotor motor[], double speed,
                           double frontLeftInches, double frontRightInches, double backLeftInches,
                           double backRightInches,
                           double angle){
