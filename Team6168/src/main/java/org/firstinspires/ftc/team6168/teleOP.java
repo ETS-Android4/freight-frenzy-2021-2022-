@@ -97,6 +97,7 @@ public class teleOP extends OpMode {
     public void loop() {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         telemetry.addData("Lift Encoders: ", UpandDown.getCurrentPosition());
         telemetry.update();
         //Slow Mode Code for a and b keys
@@ -115,6 +116,8 @@ public class teleOP extends OpMode {
 
         double stopBuffer = 0; //Not currently Implemented
 
+=======
+>>>>>>> parent of 3b5c045 (Merge pull request #1 from MasterH6168/JohnandJonandRebecca)
 =======
 >>>>>>> parent of 3b5c045 (Merge pull request #1 from MasterH6168/JohnandJonandRebecca)
         //Drive Train Code
