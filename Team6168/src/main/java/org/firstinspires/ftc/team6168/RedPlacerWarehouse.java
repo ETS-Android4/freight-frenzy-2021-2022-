@@ -49,8 +49,8 @@ public class RedPlacerWarehouse extends LinearOpMode {
     static final double P_TURN_COEFF = 0.1;     // Larger is more responsive, but also less stable
     static final double P_DRIVE_COEFF = 0.07;     // Larger is more responsive, but also less stable
 
-    double DRIVE_SPEED = 0.2;
-    double TURN_SPEED = 0.2;
+    double DRIVE_SPEED = 0.3;
+    double TURN_SPEED = 0.5;
 
     Double conversion = cpi * bias;
     Boolean exit = false;
@@ -98,25 +98,31 @@ public class RedPlacerWarehouse extends LinearOpMode {
 
         waitForStart();
 
-        strafeToPosition(3,.2);
+        liftout(18,.3);
 
-        gyroDrive(DRIVE_SPEED,-10.9,-10.9,-10.9,-10.9,0);
+        strafeToPosition(3.3,.3);
 
-        liftup(13,400);
+        liftup(13,1);
 
-        liftout(16,.3);
+        gyroDrive(DRIVE_SPEED,-10.3,-10.3,-10.3,-10.3,0);
 
-        drop();
+        open();
 
-        this.sleep(8000);
+        sleep(1000);
 
-//        liftout(-16,.3);
+        close();
 
-//        gyroDrive(DRIVE_SPEED,20,20,20,20,0);
+        liftout(-17.5,.3);
 
+        liftup(-13,.3);
 
+        gyroDrive(DRIVE_SPEED,11.3,11.3,11.3,11.3,0);
 
+        gyroTurn(TURN_SPEED, -85);
 
+        strafeToPosition(-3.2,.2);
+
+        gyroDrive(DRIVE_SPEED,-27,-27,-27,-27,-85);
     }
 
     public void liftup(double inches, double speed) {
@@ -125,11 +131,11 @@ public class RedPlacerWarehouse extends LinearOpMode {
         UpandDown.setTargetPosition(UpandDown.getCurrentPosition() + move);
         UpandDown.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         UpandDown.setPower(speed);
-        while(UpandDown.isBusy()){
-            telemetry.addData("Current Position: ", UpandDown.getCurrentPosition());
-            telemetry.addData("Target Position: ", UpandDown.getTargetPosition());
-            telemetry.update();
-        }
+//        while(UpandDown.isBusy()){
+//            telemetry.addData("Current Position: ", UpandDown.getCurrentPosition());
+//            telemetry.addData("Target Position: ", UpandDown.getTargetPosition());
+//            telemetry.update();
+//        }
     }
 
     public void liftout(double inches, double speed) {
@@ -138,16 +144,25 @@ public class RedPlacerWarehouse extends LinearOpMode {
         InandOut.setTargetPosition(InandOut.getCurrentPosition() + move);
         InandOut.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         InandOut.setPower(speed);
-        while(InandOut.isBusy()){
+//        while(InandOut.isBusy()){
+//            telemetry.addData("Current Position: ", InandOut.getCurrentPosition());
+//            telemetry.addData("Target Position: ", InandOut.getTargetPosition());
+//            telemetry.update();
+//        }
+
+    }
+
+    public void open(){
+        while(InandOut.isBusy() || UpandDown.isBusy()){
             telemetry.addData("Current Position: ", InandOut.getCurrentPosition());
             telemetry.addData("Target Position: ", InandOut.getTargetPosition());
             telemetry.update();
         }
-
+        grabber.setPosition(.5);
     }
 
-    public void drop(){
-        grabber.setPosition(.5);
+    public void close(){
+        grabber.setPosition(1);
     }
 
     public void turnWithGyro(double degrees, double speedDirection){

@@ -50,7 +50,7 @@ public class BluePlacerWarehouse extends LinearOpMode {
     static final double P_DRIVE_COEFF = 0.07;     // Larger is more responsive, but also less stable
 
     double DRIVE_SPEED = 0.3;
-    double TURN_SPEED = 0.2;
+    double TURN_SPEED = 0.5;
 
     Double conversion = cpi * bias;
     Boolean exit = false;
@@ -98,13 +98,13 @@ public class BluePlacerWarehouse extends LinearOpMode {
 
         waitForStart();
 
-        strafeToPosition(-3,.2);
+        liftout(18,.3);
 
-        gyroDrive(DRIVE_SPEED,-10.9,-10.9,-10.9,-10.9,0);
+        strafeToPosition(-3,.3);
 
-        liftup(13,400);
+        liftup(13,1);
 
-        liftout(16,.3);
+        gyroDrive(DRIVE_SPEED,-10.3,-10.3,-10.3,-10.3,0);
 
         open();
 
@@ -112,13 +112,17 @@ public class BluePlacerWarehouse extends LinearOpMode {
 
         close();
 
-        liftout(-16,.3);
+        liftout(-17.5,.3);
 
-        gyroDrive(DRIVE_SPEED,10.9,10.9,10.9,10.9,0);
+        liftup(-13,.3);
 
-        gyroTurn(TURN_SPEED, -90);
+        gyroDrive(DRIVE_SPEED,11.3,11.3,11.3,11.3,0);
 
-        gyroDrive(DRIVE_SPEED,-10.9,-10.9,-10.9,-10.9,0);
+        gyroTurn(TURN_SPEED, 90);
+
+        strafeToPosition(3,.2);
+
+        gyroDrive(DRIVE_SPEED,-27,-27,-27,-27,90);
     }
 
     public void liftup(double inches, double speed) {
@@ -127,11 +131,11 @@ public class BluePlacerWarehouse extends LinearOpMode {
         UpandDown.setTargetPosition(UpandDown.getCurrentPosition() + move);
         UpandDown.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         UpandDown.setPower(speed);
-        while(UpandDown.isBusy()){
-            telemetry.addData("Current Position: ", UpandDown.getCurrentPosition());
-            telemetry.addData("Target Position: ", UpandDown.getTargetPosition());
-            telemetry.update();
-        }
+//        while(UpandDown.isBusy()){
+//            telemetry.addData("Current Position: ", UpandDown.getCurrentPosition());
+//            telemetry.addData("Target Position: ", UpandDown.getTargetPosition());
+//            telemetry.update();
+//        }
     }
 
     public void liftout(double inches, double speed) {
@@ -140,15 +144,20 @@ public class BluePlacerWarehouse extends LinearOpMode {
         InandOut.setTargetPosition(InandOut.getCurrentPosition() + move);
         InandOut.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         InandOut.setPower(speed);
-        while(InandOut.isBusy()){
-            telemetry.addData("Current Position: ", InandOut.getCurrentPosition());
-            telemetry.addData("Target Position: ", InandOut.getTargetPosition());
-            telemetry.update();
-        }
+//        while(InandOut.isBusy()){
+//            telemetry.addData("Current Position: ", InandOut.getCurrentPosition());
+//            telemetry.addData("Target Position: ", InandOut.getTargetPosition());
+//            telemetry.update();
+//        }
 
     }
 
     public void open(){
+                while(InandOut.isBusy() || UpandDown.isBusy()){
+            telemetry.addData("Current Position: ", InandOut.getCurrentPosition());
+            telemetry.addData("Target Position: ", InandOut.getTargetPosition());
+            telemetry.update();
+        }
         grabber.setPosition(.5);
     }
 
