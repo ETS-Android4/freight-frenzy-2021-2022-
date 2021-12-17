@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1aa3ffba-e181-4190-80b5-32665d3b0713" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/BluePlacerWarehouse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/AutoBlueCarousel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/AutoBlueCarousel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/AutoBlueWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/AutoBlueWarehouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/RedPlacerCarousel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/RedPlacerCarousel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/RedPlacerWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/RedPlacerWarehouse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/teleOP.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/teleOP.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +16,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\lsatt\.android\avd\Pixel_2_API_29.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\libren\.android\avd\Pixel_3a_API_30_x86.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />

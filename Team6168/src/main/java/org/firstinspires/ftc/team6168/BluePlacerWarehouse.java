@@ -19,8 +19,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="RedPlacerWarehouse")
-public class RedPlacerWarehouse extends LinearOpMode {
+@Autonomous(name="BluePlacerWarehouse")
+public class BluePlacerWarehouse extends LinearOpMode {
     //
     DcMotor frontleft;
     DcMotor frontright;
@@ -98,9 +98,9 @@ public class RedPlacerWarehouse extends LinearOpMode {
 
         waitForStart();
 
-        strafeToPosition(3,.2);
+        strafeToPosition(-3,.2);
 
-        gyroDrive(DRIVE_SPEED,-10.9,-10.9,-10.9,-10.9,0);
+        gyroDrive(DRIVE_SPEED,10.9,10.9,10.9,10.9,0);
 
         liftup(13,400);
 

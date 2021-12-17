@@ -102,6 +102,8 @@ public class teleOP extends OpMode {
     @Override
     public void loop() {
 
+        telemetry.addData("Lift Encoders: ", UpandDown.getCurrentPosition());
+        telemetry.update();
         //Slow Mode Code for a and b keys
         if (gamepad1.a == true) {
             speedMode = .4;
@@ -200,18 +202,18 @@ public class teleOP extends OpMode {
 
         //InandOut Code
         if (gamepad2.right_stick_x >= 0.3) {
-            InandOut.setPower(0.9);
+            InandOut.setPower(1);
         } else if (gamepad2.right_stick_x <= -0.3) {
-            InandOut.setPower(-0.9);
+            InandOut.setPower(-1);
         }else{
             InandOut.setPower(0);
         }
 
         //UpandDown
         if (gamepad2.left_stick_y >= 0.3) {
-            UpandDown.setPower(0.9);
+            UpandDown.setPower(1);
         } else if (gamepad2.left_stick_y <= -0.3) {
-            UpandDown.setPower(-0.9);
+            UpandDown.setPower(-1);
         }else{
             UpandDown.setPower(0);
         }
