@@ -96,49 +96,48 @@ public class teleOP extends OpMode {
     @Override
     public void loop() {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        telemetry.addData("Lift Encoders: ", UpandDown.getCurrentPosition());
-        telemetry.update();
-        //Slow Mode Code for a and b keys
-        if (gamepad1.a == true) {
-            speedMode = .4;
-        } else if (gamepad1.b == true) {
-            speedMode = 1;
-        }
-
-        //Slow Mode Code for bumpers
-        if (gamepad1.right_bumper == true && speedMode > .2) {
-            speedMode -= .05;
-        } else if (gamepad1.right_trigger >= .5 && speedMode < 2) {
-            speedMode += .05;
-        }
-
-        double stopBuffer = 0; //Not currently Implemented
-
-=======
->>>>>>> parent of 3b5c045 (Merge pull request #1 from MasterH6168/JohnandJonandRebecca)
-=======
->>>>>>> parent of 3b5c045 (Merge pull request #1 from MasterH6168/JohnandJonandRebecca)
-=======
->>>>>>> parent of 3b5c045 (Merge pull request #1 from MasterH6168/JohnandJonandRebecca)
-=======
->>>>>>> parent of 3b5c045 (Merge pull request #1 from MasterH6168/JohnandJonandRebecca)
-        //Drive Train Code
-        double speed = Math.sqrt(2) * Math.pow(Math.pow(gamepad1.left_stick_x, 4) + Math.pow(-gamepad1.left_stick_y, 4), 0.5);
-        double angle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x);
-        double rotation = Math.signum(gamepad1.right_stick_x) * Math.pow(gamepad1.right_stick_x, 2);
-
-        float primaryDiagonalSpeed = (float) (speed * Math.sin(angle - (Math.PI / 4.0)));
-        float secondaryDiagonalSpeed = (float) (speed * Math.cos(angle - (Math.PI / 4.0)));
-
-        backleft.setPower(secondaryDiagonalSpeed - rotation);
-        frontleft.setPower(secondaryDiagonalSpeed + rotation);
-        backright.setPower(primaryDiagonalSpeed - rotation);
-        frontright.setPower(primaryDiagonalSpeed + rotation);
-
+//
+//        telemetry.addData("Lift Encoders: ", UpandDown.getCurrentPosition());
+//        telemetry.update();
+//        //Slow Mode Code for a and b keys
+//        if (gamepad1.a == true) {
+//            speedMode = .4;
+//        } else if (gamepad1.b == true) {
+//            speedMode = 1;
+//        }
+//
+//        //Slow Mode Code for bumpers
+//        if (gamepad1.right_bumper == true && speedMode > .2) {
+//            speedMode -= .05;
+//        } else if (gamepad1.right_trigger >= .5 && speedMode < 2) {
+//            speedMode += .05;
+//        }
+//
+//        double stopBuffer = 0; //Not currently Implemented
+//
+//=======
+//>>>>>>> parent of 3b5c045 (Merge pull request #1 from MasterH6168/JohnandJonandRebecca)
+//=======
+//>>>>>>> parent of 3b5c045 (Merge pull request #1 from MasterH6168/JohnandJonandRebecca)
+//=======
+//>>>>>>> parent of 3b5c045 (Merge pull request #1 from MasterH6168/JohnandJonandRebecca)
+//=======
+//>>>>>>> parent of 3b5c045 (Merge pull request #1 from MasterH6168/JohnandJonandRebecca)
+//=======
+//>>>>>>> parent of 3b5c045 (Merge pull request #1 from MasterH6168/JohnandJonandRebecca)
+//        //Drive Train Code
+//        double speed = Math.sqrt(2) * Math.pow(Math.pow(gamepad1.left_stick_x, 4) + Math.pow(-gamepad1.left_stick_y, 4), 0.5);
+//        double angle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x);
+//        double rotation = Math.signum(gamepad1.right_stick_x) * Math.pow(gamepad1.right_stick_x, 2);
+//
+//        float primaryDiagonalSpeed = (float) (speed * Math.sin(angle - (Math.PI / 4.0)));
+//        float secondaryDiagonalSpeed = (float) (speed * Math.cos(angle - (Math.PI / 4.0)));
+//
+//        backleft.setPower(secondaryDiagonalSpeed - rotation);
+//        frontleft.setPower(secondaryDiagonalSpeed + rotation);
+//        backright.setPower(primaryDiagonalSpeed - rotation);
+//        frontright.setPower(primaryDiagonalSpeed + rotation);
+//
 
         //Carosel Spinner Code
         if (gamepad2.left_bumper) {
