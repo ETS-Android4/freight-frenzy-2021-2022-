@@ -58,7 +58,7 @@ public class RingDetector {
         camera.stopStreaming();
     }
 
-    public int getDecision(double leftBoxColor, double centerBoxColor, double rightBoxColor){
+    public String getDecision(double leftBoxColor, double centerBoxColor, double rightBoxColor){
 
         if(leftBoxColor > centerBoxColor && leftBoxColor > rightBoxColor) {
             return "left";
@@ -75,23 +75,23 @@ public class RingDetector {
         @Override
         public Mat processFrame(Mat input){
 
-            leftBoxColor = getAverageColor(input, leftBox_topLeft, leftBox_bottomRight);
-            centerBoxColor = getAverageColor(input, centerBox_topLeft, centerBox_bottomRight);
-            rightBoxColor = getAverageColor(input, rightBox_topLeft, rightBox_bottomRight);
+            int leftBoxColor = getAverageColor(input, leftBox_topLeft, leftBox_bottomRight);
+            int centerBoxColor = getAverageColor(input, centerBox_topLeft, centerBox_bottomRight);
+            int rightBoxColor = getAverageColor(input, rightBox_topLeft, rightBox_bottomRight);
 
             int thickness = 3;
             Scalar leftColor = new Scalar(255,0,0);
             Scalar centerColor = new Scalar(255,0,0);
             Scalar rightColor = new Scalar(255,0,0);
 
-            new position = getDecision(leftBoxColor, centerBoxColor, rightBoxColor);
+            String position = getDecision(leftBoxColor, centerBoxColor, rightBoxColor);
             if (position == "left"){
-                leftColor = Scalar(0,255,0);
+                leftColor = new Scalar(0,255,0);
             }
             else if (position == "center"){
-                centerColor = Scalar(0,255,0);
+                centerColor = new Scalar(0,255,0);
             } else {
-                rightColor = Scalar(0,255,0);
+                rightColor = new Scalar(0,255,0);
             }
 
             Imgproc.rectangle(input, leftBox_topLeft, leftBox_bottomRight, leftColor, thickness);
@@ -103,7 +103,7 @@ public class RingDetector {
             return input;
         }
 
-        private RGBColor getAverageColor(Mat mat, Point topLeft, Point bottomRight){
+        private int getAverageColor(Mat mat, Point topLeft, Point bottomRight){
             int red = 0;
             int green = 0;
             int blue = 0;
@@ -121,13 +121,10 @@ public class RingDetector {
             red /= total;
             green /= total;
             blue /= total;
+            int yellow = red + green;
 
-            return new RGBColor(red, green, blue);
-        }
-
-        public void sendTelemetry(){
-            opMode.telemetry.addData("Top :" + " R " + box.getRed() + " G " + box.getGreen() + " B " + box.getBlue() + "Y" + box.getYellow() + "Decision: ", getDecision() );
-            opMode.telemetry.update();
+            opMode.telemetry.addData("rgby", red);
+            return yellow;
         }
 
     }
