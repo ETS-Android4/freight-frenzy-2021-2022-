@@ -19,17 +19,23 @@ public class RingDetector {
 
     CustomPipeline pipeline;
 
-    private final Point centerBox_topLeft    = new Point(130,80);
-    private final Point centerBox_bottomRight    = new Point(205, 135);
+    private final Point centerBox_topLeft    = new Point(130,60);
+    private final Point centerBox_bottomRight    = new Point(180, 110);
 
-//    private final Point RED_TOP_TL     = new Point(0,135);
-//    private final Point RED_TOP_BR     = new Point(50, 165);
+    private final Point leftBox_topLeft    = new Point(0,60);
+    private final Point leftBox_bottomRight    = new Point(30, 110);
 
+    private final Point rightBox_topLeft    = new Point(280,60);
+    private final Point rightBox_bottomRight    = new Point(320, 110);
 
     private Point CTL;
     private Point CBR;
-    //private Point bottomTL;
-    //private Point bottomBR;
+
+    private Point LTL;
+    private Point LBR;
+
+    private Point RTL;
+    private Point RBR;
 
     private RGBColor box;
 
@@ -49,10 +55,12 @@ public class RingDetector {
 
         CTL = centerBox_topLeft;
         CBR = centerBox_bottomRight;
-        //gives points depending on red or blue
-        //topTL = (isRed) ? RED_TOP_TL : BLUE_TOP_TL;
-        //topBR = (isRed) ? RED_TOP_BR : BLUE_TOP_BR;
 
+        LTL = leftBox_topLeft;
+        LBR = leftBox_bottomRight;
+
+        RTL = rightBox_topLeft;
+        RBR = rightBox_bottomRight;
     }
 
     public void stopStreaming(){
@@ -96,6 +104,10 @@ public class RingDetector {
             }
 
             Imgproc.rectangle(input, CTL, CBR, Color, thickness);
+
+            Imgproc.rectangle(input, LTL, LBR, Color, thickness);
+
+            Imgproc.rectangle(input, RTL, RBR, Color, thickness);
 
             //sendTelemetry();
 
