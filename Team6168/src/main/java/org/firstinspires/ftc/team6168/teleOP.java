@@ -71,6 +71,7 @@ public class teleOP extends OpMode {
         frontright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         InandOut.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         UpandDown.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        SpinnerMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         backleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -180,11 +181,7 @@ public class teleOP extends OpMode {
         //Carosel Spinner Code
         if (gamepad2.left_bumper) {
             SpinnerMotor.setPower(1);
-        }else {
-            SpinnerMotor.setPower(0);
-        }
-
-        if (gamepad2.right_bumper) {
+        }else if (gamepad2.right_bumper) {
             SpinnerMotor.setPower(-1);
         }else {
             SpinnerMotor.setPower(0);
