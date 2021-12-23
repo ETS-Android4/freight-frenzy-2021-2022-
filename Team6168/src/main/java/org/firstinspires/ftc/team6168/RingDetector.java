@@ -3,7 +3,6 @@ package org.firstinspires.ftc.team6168;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.team6168.RGBColor;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
@@ -17,7 +16,7 @@ public class RingDetector {
     OpMode opMode;
     OpenCvCamera camera;
 
-    CustomPipeline pipeline;
+    AddBoxesPipeline pipeline;
 
     private final Point centerBox_topLeft    = new Point(130,60);
     private final Point centerBox_bottomRight    = new Point(180, 110);
@@ -30,6 +29,7 @@ public class RingDetector {
 
     private Point CTL;
     private Point CBR;
+
 
     private Point LTL;
     private Point LBR;
@@ -48,7 +48,7 @@ public class RingDetector {
 
         camera = OpenCvCameraFactory.getInstance().createWebcam(opMode.hardwareMap.get(WebcamName.class, "Webcam"), cameraMonitorViewId);
 
-        pipeline = new CustomPipeline();
+        pipeline = new AddBoxesPipeline();
         camera.openCameraDevice();
         camera.setPipeline(pipeline);
         camera.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
@@ -67,57 +67,62 @@ public class RingDetector {
         camera.stopStreaming();
     }
 
-    public int getDecision(){
-        int boxValue = box.getYellow();
-        opMode.telemetry.addData("Value: ", boxValue);
+
+    public String getDecision(double leftBoxColor, double centerBoxColor, double rightBoxColor){
+        opMode.telemetry.addData("left", String.valueOf(leftBoxColor), "center", centerBoxColor,"right", rightBoxColor);
         opMode.telemetry.update();
-        boolean topRing = false;
-        boolean bottomRing = false;
-        if (boxValue < 200) {
-            return 4;
-
-
-        } else if (boxValue < 290){
-            return 1;
-
-        } else{
-            return 0;
-
+        if((leftBoxColor > centerBoxColor) && (leftBoxColor > rightBoxColor)) {
+            return "left";
+        } else if((leftBoxColor > centerBoxColor) && (leftBoxColor > rightBoxColor)){
+            return "center";
+            } else{
+            return "right";
         }
     }
 
-    class CustomPipeline extends OpenCvPipeline {
+    //Add boxes to the image display
+    class AddBoxesPipeline extends OpenCvPipeline {
 
         @Override
         public Mat processFrame(Mat input){
 
-            box = getAverageColor(input, CTL, CBR);
+            int leftBoxColor = getAverageColor(input, leftBox_topLeft, leftBox_bottomRight);
+            int centerBoxColor = getAverageColor(input, centerBox_topLeft, centerBox_bottomRight);
+            int rightBoxColor = getAverageColor(input, rightBox_topLeft, rightBox_bottomRight);
+
             int thickness = 3;
-            //Scalar topColor = new Scalar(255,0,0);
-            Scalar Color = new Scalar(255,0,0);
-            int position = getDecision();
-            if (position == 4){
-                Color = new Scalar(0,255,0);
+            Scalar leftColor = new Scalar(255,0,0);
+            Scalar centerColor = new Scalar(255,0,0);
+            Scalar rightColor = new Scalar(255,0,0);
+
+            String position = getDecision(leftBoxColor, centerBoxColor, rightBoxColor);
+            if (position == "left"){
+                leftColor = new Scalar(0,255,0);
             }
-            else if (position == 1){
-                Color = new Scalar(0,255,0);
+            else if (position == "center"){
+                centerColor = new Scalar(0,255,0);
+            } else {
+                rightColor = new Scalar(0,255,0);
             }
+//
+//            Imgproc.rectangle(input, leftBox_topLeft, leftBox_bottomRight, leftColor, thickness);
+//            Imgproc.rectangle(input, centerBox_topLeft, centerBox_bottomRight, centerColor, thickness);
+//            Imgproc.rectangle(input, rightBox_topLeft, rightBox_bottomRight, rightColor, thickness);
 
-            Imgproc.rectangle(input, CTL, CBR, Color, thickness);
-
-            Imgproc.rectangle(input, LTL, LBR, Color, thickness);
-
-            Imgproc.rectangle(input, RTL, RBR, Color, thickness);
+            Imgproc.rectangle(input, LTL, LBR, leftColor, thickness);
+            Imgproc.rectangle(input, CTL, CBR, centerColor, thickness);
+            Imgproc.rectangle(input, RTL, RBR, rightColor, thickness);
 
             //sendTelemetry();
 
             return input;
         }
 
-        private RGBColor getAverageColor(Mat mat, Point topLeft, Point bottomRight){
+        private int getAverageColor(Mat mat, Point topLeft, Point bottomRight){
             int red = 0;
             int green = 0;
             int blue = 0;
+            int yellow = 0;
             int total = 0;
 
             for (int x = (int)topLeft.x; x < bottomRight.x; x++){
@@ -132,14 +137,19 @@ public class RingDetector {
             red /= total;
             green /= total;
             blue /= total;
+            yellow = red + green;
 
-            return new RGBColor(red, green, blue);
+            opMode.telemetry.addData("red", String.valueOf(red));
+            opMode.telemetry.addData("green", String.valueOf(green));
+            opMode.telemetry.addData("blue", String.valueOf(blue));
+            opMode.telemetry.addData("yellow", String.valueOf(yellow));
+
+            return (yellow);
+
+
         }
 
-        public void sendTelemetry(){
-            opMode.telemetry.addData("Top :" + " R " + box.getRed() + " G " + box.getGreen() + " B " + box.getBlue() + "Y" + box.getYellow() + "Decision: ", getDecision() );
-            opMode.telemetry.update();
-        }
+
 
     }
 }
