@@ -98,11 +98,22 @@ public class BluePlacerWarehouse extends LinearOpMode {
 
         waitForStart();
 
+        //Change these values to change which level the cargo is dropped into
+
+        //Top level
         liftout(18,.3);
-
         strafeToPosition(-3,.3);
-
         liftup(13,1);
+
+        //TODO Middle level
+        //liftout(18,.3);
+        //strafeToPosition(-3,.3);
+        //liftup(13,1);
+
+        //TODO Bottom level
+//        liftout(18,.3);
+//        strafeToPosition(-3,.3);
+//        liftup(13,1);
 
         gyroDrive(DRIVE_SPEED,-10.3,-10.3,-10.3,-10.3,0);
 

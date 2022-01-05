@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.team6168;
 
+import androidx.annotation.NonNull;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -19,18 +21,23 @@ public class RingDetector {
 
     AddBoxesPipeline pipeline;
 
-    private final Point centerBox_topLeft    = new Point(130,80);
-    private final Point centerBox_bottomRight    = new Point(205, 135);
+    private final Point centerBox_topLeft    = new Point(130,60);
+    private final Point centerBox_bottomRight    = new Point(180, 110);
 
-//    private final Point RED_TOP_TL     = new Point(0,135);
-//    private final Point RED_TOP_BR     = new Point(50, 165);
+    private final Point leftBox_topLeft    = new Point(0,60);
+    private final Point leftBox_bottomRight    = new Point(30, 110);
 
+    private final Point rightBox_topLeft    = new Point(280,60);
+    private final Point rightBox_bottomRight    = new Point(320, 110);
 
     private Point CTL;
     private Point CBR;
 
+    private Point LTL;
+    private Point LBR;
 
-    private RGBColor box;
+    private Point RTL;
+    private Point RBR;
 
     public RingDetector(OpMode op){
 
@@ -48,10 +55,12 @@ public class RingDetector {
 
         CTL = centerBox_topLeft;
         CBR = centerBox_bottomRight;
-        //gives points depending on red or blue
-        //topTL = (isRed) ? RED_TOP_TL : BLUE_TOP_TL;
-        //topBR = (isRed) ? RED_TOP_BR : BLUE_TOP_BR;
 
+        LTL = leftBox_topLeft;
+        LBR = leftBox_bottomRight;
+
+        RTL = rightBox_topLeft;
+        RBR = rightBox_bottomRight;
     }
 
     public void stopStreaming(){
@@ -60,9 +69,9 @@ public class RingDetector {
 
     public String getDecision(double leftBoxColor, double centerBoxColor, double rightBoxColor){
 
-        if(leftBoxColor > centerBoxColor && leftBoxColor > rightBoxColor) {
+        if((leftBoxColor > centerBoxColor) && (leftBoxColor > rightBoxColor)) {
             return "left";
-        } else if(leftBoxColor > centerBoxColor && leftBoxColor > rightBoxColor){
+        } else if((leftBoxColor > centerBoxColor) && (leftBoxColor > rightBoxColor)){
             return "center";
             } else{
             return "right";
@@ -85,10 +94,10 @@ public class RingDetector {
             Scalar rightColor = new Scalar(255,0,0);
 
             String position = getDecision(leftBoxColor, centerBoxColor, rightBoxColor);
-            if (position == "left"){
+            if (position.equals("left")){
                 leftColor = new Scalar(0,255,0);
             }
-            else if (position == "center"){
+            else if (position.equals("center")){
                 centerColor = new Scalar(0,255,0);
             } else {
                 rightColor = new Scalar(0,255,0);
@@ -98,12 +107,11 @@ public class RingDetector {
             Imgproc.rectangle(input, centerBox_topLeft, centerBox_bottomRight, centerColor, thickness);
             Imgproc.rectangle(input, rightBox_topLeft, rightBox_bottomRight, rightColor, thickness);
 
-            //sendTelemetry();
 
             return input;
         }
 
-        private int getAverageColor(Mat mat, Point topLeft, Point bottomRight){
+        private int getAverageColor(Mat mat, @NonNull Point topLeft, @NonNull Point bottomRight){
             int red = 0;
             int green = 0;
             int blue = 0;
