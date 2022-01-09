@@ -55,7 +55,6 @@ public class Vistion extends LinearOpMode {
     //
 
 
-
     public void runOpMode() {
 
         telemetry.clearAll();
@@ -68,7 +67,7 @@ public class Vistion extends LinearOpMode {
         frontright = hardwareMap.dcMotor.get("Frontright");
         backleft = hardwareMap.dcMotor.get("Backleft");
         backright = hardwareMap.dcMotor.get("Backright");
-   
+
 
         frontright.setDirection(DcMotorSimple.Direction.REVERSE);
         backright.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -89,34 +88,34 @@ public class Vistion extends LinearOpMode {
 
 
         waitForStart();
-
-        int rings = detector.getDecision();
-        if (rings == 4) {
 //
-//            strafeToPosition(90, 0.8);
-//            //
-//            moveToPosition(6.8, 0.8);
-//
-//            sleep(1000);
-//
-//            WobbleMove(-60, 0.8);
-//
-//            sleep(3000);
-//
-//            WobbleUnGrab();
-//
-//            sleep(1000);
-//            //
-//            moveToPosition(-17, 0.8);
-//            //
-//            strafeToPosition(-45, 0.8);
-////            turns robot
-//            encoderDrive(0.8,-12,12,5000);
+////        int rings = detector.getDecision();
+////        if (rings == 4) {
 ////
-//            Shooter();
-        }
-
-        if (rings == 0) {
+////            strafeToPosition(90, 0.8);
+////            //
+////            moveToPosition(6.8, 0.8);
+////
+////            sleep(1000);
+////
+////            WobbleMove(-60, 0.8);
+////
+////            sleep(3000);
+////
+////            WobbleUnGrab();
+////
+////            sleep(1000);
+////            //
+////            moveToPosition(-17, 0.8);
+////            //
+////            strafeToPosition(-45, 0.8);
+//////            turns robot
+////            encoderDrive(0.8,-12,12,5000);
+//////
+////            Shooter();
+//        }
+//
+//        if (rings == 0) {
 
 //            strafeToPosition(35, 0.8);
 //            //
@@ -139,10 +138,10 @@ public class Vistion extends LinearOpMode {
 ////
 //            Shooter();
 
-        }
+//        }
 
 
-        if (rings == 1) {
+//        if (rings == 1) {
 
 //
 //            strafeToPosition(55, 0.8);
@@ -167,7 +166,6 @@ public class Vistion extends LinearOpMode {
 //            Shooter();
 //
 //        }
-            //
-        }
     }
 }
+
