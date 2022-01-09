@@ -90,8 +90,8 @@ public class Vistion extends LinearOpMode {
 
         waitForStart();
 
-        int rings = detector.getDecision();
-        if (rings == 4) {
+//        int rings = detector.boxleft;
+//        if (rings == 4) {
 //
 //            strafeToPosition(90, 0.8);
 //            //
@@ -116,7 +116,7 @@ public class Vistion extends LinearOpMode {
 //            Shooter();
         }
 
-        if (rings == 0) {
+       // if (rings == 0) {
 
 //            strafeToPosition(35, 0.8);
 //            //
@@ -142,7 +142,7 @@ public class Vistion extends LinearOpMode {
         }
 
 
-        if (rings == 1) {
+       // if (rings == 1) {
 
 //
 //            strafeToPosition(55, 0.8);
@@ -168,6 +168,4 @@ public class Vistion extends LinearOpMode {
 //
 //        }
             //
-        }
-    }
-}
+
