@@ -24,14 +24,15 @@
   <component name="ChangeListManager">
     <list default="true" id="e5d66c9d-0e56-4609-a91c-6b9cdb73f635" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/RingDetector.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/RingDetector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/RingDetector.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/DuckDetector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/Vistion.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/VistionBlue.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[35a709c970373f51]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\libren\.android\avd\Pixel_3a_API_30_x86.avd]" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -58,6 +59,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="23TcvCZmUwI3ZmV6lBgFEL0Fj6q" />
   <component name="ProjectLevelVcsManager">

@@ -17,7 +17,7 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-public class RingDetector {
+public class DuckDetector {
     OpMode opMode;
     OpenCvCamera camera;
 
@@ -39,7 +39,7 @@ public class RingDetector {
     boolean boxLeft = false, boxRight = false, boxCenter = false;
 
 
-    public RingDetector(OpMode op){
+    public DuckDetector(OpMode op){
 
         opMode = op;
 
