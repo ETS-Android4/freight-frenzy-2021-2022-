@@ -75,19 +75,23 @@ public class AutoBlueCarousel extends LinearOpMode {
         telemetry.update();
         waitForStartify();
 
-        strafeToPosition(-2.1,DRIVE_SPEED);
+        strafeToPosition(-6,DRIVE_SPEED);
 
-        gyroDrive(DRIVE_SPEED,10,10,10,10,0);
+        gyroTurn(TURN_SPEED, -15);
+
+        gyroDrive(DRIVE_SPEED,9.6,9.6,9.6,9.6, -15);
 
         sleep(500);
 
-        Spinner.setPower(.7);
+        Spinner.setPower(.9);
         sleep(4000);
         Spinner.setPower(0);
 
-        strafeToPosition(-16,DRIVE_SPEED);
+        gyroTurn(TURN_SPEED, 60);
 
-        gyroDrive(DRIVE_SPEED,2,2,2,2,0);
+//        strafeToPosition(-16,DRIVE_SPEED);
+//
+//        gyroDrive(DRIVE_SPEED,5,5,5,5,0);
 
     }
 

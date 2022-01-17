@@ -52,7 +52,7 @@ public class AutoBlueWarehouse extends LinearOpMode {
     public void runOpMode() {
 
         //
-        Utilities.initGyro();
+        initGyro();
         //
         frontleft = hardwareMap.dcMotor.get("Frontleft");
         frontright = hardwareMap.dcMotor.get("Frontright");

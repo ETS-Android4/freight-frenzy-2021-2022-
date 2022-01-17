@@ -98,7 +98,7 @@ public class BluePlacerWarehouse extends LinearOpMode {
 
         waitForStart();
 
-        liftout(18,.3);
+        liftout(19,.3);
 
         strafeToPosition(-3,.3);
 
