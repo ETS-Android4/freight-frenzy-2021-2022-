@@ -49,8 +49,8 @@ public class VistionBlue extends LinearOpMode {
     static final double P_TURN_COEFF = 0.1;     // Larger is more responsive, but also less stable
     static final double P_DRIVE_COEFF = 0.07;     // Larger is more responsive, but also less stable
 
-    double DRIVE_SPEED = 0.3;
-    double TURN_SPEED = 0.5;
+    double DRIVE_SPEED = 0.4;
+    double TURN_SPEED = 0.4;
 
     Double conversion = cpi * bias;
     Boolean exit = false;
@@ -59,7 +59,7 @@ public class VistionBlue extends LinearOpMode {
     Orientation angles;
     Acceleration gravity;
 
-    public void runOpMode(){
+    public void runOpMode() throws InterruptedException {
 
         initGyro();
 
@@ -84,7 +84,8 @@ public class VistionBlue extends LinearOpMode {
         InandOut.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         UpandDown.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        DuckDetector detector = new DuckDetector(this);
+        BlueDuckDetector detector = new BlueDuckDetector(this);
+
 
 
         telemetry.addLine("Start Gyro");
@@ -99,33 +100,59 @@ public class VistionBlue extends LinearOpMode {
 
         waitForStart();
 
-        if (detector.boxLeft == true) {
+        telemetry.addData("Duck Left",detector.boxLeft);
+        telemetry.addData("Duck Center",detector.boxCenter);
+        telemetry.addData("Duck Right",detector.boxRight);
 
-            gyroDrive(DRIVE_SPEED,10,10,10,10,0);
+        telemetry.addData("leftduckdetected",detector.left_avg);
+        telemetry.addData("leftduckdetected",detector.left_avg);
+        telemetry.update();
 
-            sleep(500);
 
-            Spinner.setPower(.7);
-            sleep(4000);
-            Spinner.setPower(0);
+        strafeToPosition(-6,DRIVE_SPEED);
 
-            strafeToPosition(-6, DRIVE_SPEED);
+        gyroTurn(TURN_SPEED, -15);
 
-            gyroTurn(TURN_SPEED, 90);
+        gyroDrive(.2,9.75,9.75,9.75,9.75, -15);
 
-            liftup(13, .3);
+        sleep(500);
 
-            strafeToPosition(10, DRIVE_SPEED);
+        Spinner.setPower(.9);
+        sleep(4000);
+        Spinner.setPower(0);
 
-            gyroDrive(DRIVE_SPEED,-10,-10,-10,-10,0);
+        strafeToPosition(- 5, DRIVE_SPEED);
 
-            liftout(-17.5,.3);
+        liftup(13, .3);
 
-            open();
+        gyroDrive(DRIVE_SPEED,-27,-27,-27,-27,0);
 
-            close();
-            
-        }
+        gyroTurn(TURN_SPEED, -90);
+
+        gyroDrive(.2,-5.5,-5.5,-5.5,-5.5,-90);
+
+        liftout(21, .6);
+
+        open();
+
+        sleep(500);
+
+        close();
+
+        sleep(500);
+
+        liftout(-25, 1);
+
+        gyroDrive(DRIVE_SPEED,4,4,4,4,-90);
+
+        liftup(-13,.6);
+
+        strafeToPosition(-32,DRIVE_SPEED);
+
+        gyroDrive(.4,-9,-9,-9,-9,-90);
+
+        sleep(2000);
+
     }
 
     public void liftup(double inches, double speed) {
@@ -157,9 +184,9 @@ public class VistionBlue extends LinearOpMode {
 
     public void open(){
         while(InandOut.isBusy() || UpandDown.isBusy()){
-            telemetry.addData("Current Position: ", InandOut.getCurrentPosition());
-            telemetry.addData("Target Position: ", InandOut.getTargetPosition());
-            telemetry.update();
+//            telemetry.addData("Current Position: ", InandOut.getCurrentPosition());
+//            telemetry.addData("Target Position: ", InandOut.getTargetPosition());
+//            telemetry.update();
         }
         grabber.setPosition(.5);
     }
@@ -172,12 +199,12 @@ public class VistionBlue extends LinearOpMode {
         //<editor-fold desc="Initialize">
         angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         double yaw = -angles.firstAngle;//make this negative
-        telemetry.addData("Speed Direction", speedDirection);
-        telemetry.addData("Yaw", yaw);
-        telemetry.update();
-        //
-        telemetry.addData("stuff", speedDirection);
-        telemetry.update();
+//        telemetry.addData("Speed Direction", speedDirection);
+//        telemetry.addData("Yaw", yaw);
+//        telemetry.update();
+//        //
+//        telemetry.addData("stuff", speedDirection);
+//        telemetry.update();
         //
         double first;
         double second;
@@ -217,10 +244,10 @@ public class VistionBlue extends LinearOpMode {
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 gravity = imu.getGravity();
                 yaw = -angles.firstAngle;
-                telemetry.addData("Position", yaw);
-                telemetry.addData("first before", first);
-                telemetry.addData("first after", convertify(first));
-                telemetry.update();
+//                telemetry.addData("Position", yaw);
+//                telemetry.addData("first before", first);
+//                telemetry.addData("first after", convertify(first));
+                //telemetry.update();
             }
         }else{
             //
@@ -228,10 +255,10 @@ public class VistionBlue extends LinearOpMode {
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 gravity = imu.getGravity();
                 yaw = -angles.firstAngle;
-                telemetry.addData("Position", yaw);
-                telemetry.addData("first before", first);
-                telemetry.addData("first after", convertify(first));
-                telemetry.update();
+//                telemetry.addData("Position", yaw);
+//                telemetry.addData("first before", first);
+//                telemetry.addData("first after", convertify(first));
+                //telemetry.update();
             }
         }
         //
@@ -245,19 +272,19 @@ public class VistionBlue extends LinearOpMode {
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 gravity = imu.getGravity();
                 yaw = -angles.firstAngle;
-                telemetry.addData("Position", yaw);
-                telemetry.addData("second before", second);
-                telemetry.addData("second after", convertify(second));
-                telemetry.update();
+//                telemetry.addData("Position", yaw);
+//                telemetry.addData("second before", second);
+//                telemetry.addData("second after", convertify(second));
+                //telemetry.update();
             }
             while (!((seconda < yaw && yaw < 180) || (-180 < yaw && yaw < secondb)) && opModeIsActive()) {//within range?
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 gravity = imu.getGravity();
                 yaw = -angles.firstAngle;
-                telemetry.addData("Position", yaw);
-                telemetry.addData("second before", second);
-                telemetry.addData("second after", convertify(second));
-                telemetry.update();
+                //telemetry.addData("Position", yaw);
+                //telemetry.addData("second before", second);
+                //telemetry.addData("second after", convertify(second));
+                //telemetry.update();
             }
             frontleft.setPower(0);
             frontright.setPower(0);
@@ -433,11 +460,11 @@ public class VistionBlue extends LinearOpMode {
                 backright.setPower(backRightSpeed);
 
                 // Display drive status for the driver.
-                telemetry.addData("Err/St", "%5.1f/%5.1f", error, steer);
-                telemetry.addData("Target", "%7d:%7d", newBackLeftTarget, newBackRightTarget, newFrontLeftTarget, newFrontRightTarget);
-                telemetry.addData("Actual", "%7d:%7d", backleft.getCurrentPosition(), backright.getCurrentPosition(), frontleft.getCurrentPosition(), frontright.getCurrentPosition());
-                telemetry.addData("Speed", "%5.2f:%5.2f", backLeftSpeed, backRightSpeed, frontLeftSpeed, frontRightSpeed);
-                telemetry.update();
+//                telemetry.addData("Err/St", "%5.1f/%5.1f", error, steer);
+//                telemetry.addData("Target", "%7d:%7d", newBackLeftTarget, newBackRightTarget, newFrontLeftTarget, newFrontRightTarget);
+//                telemetry.addData("Actual", "%7d:%7d", backleft.getCurrentPosition(), backright.getCurrentPosition(), frontleft.getCurrentPosition(), frontright.getCurrentPosition());
+//                telemetry.addData("Speed", "%5.2f:%5.2f", backLeftSpeed, backRightSpeed, frontLeftSpeed, frontRightSpeed);
+//                telemetry.update();
 
                 ErrorAmount = ((Math.abs(((newBackLeftTarget) - (backleft.getCurrentPosition())))
                         + (Math.abs(((newFrontLeftTarget) - (frontleft.getCurrentPosition()))))
@@ -527,9 +554,9 @@ public class VistionBlue extends LinearOpMode {
         frontright.setPower(rightSpeed);
 
         // Display it for the driver.
-        telemetry.addData("Target", "%5.2f", angle);
-        telemetry.addData("Err/St", "%5.2f/%5.2f", error, steer);
-        telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);
+//        telemetry.addData("Target", "%5.2f", angle);
+//        telemetry.addData("Err/St", "%5.2f/%5.2f", error, steer);
+//        telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);
 
         return onTarget;
     }
