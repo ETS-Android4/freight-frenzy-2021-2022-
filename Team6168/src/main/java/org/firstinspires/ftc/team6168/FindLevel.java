@@ -19,6 +19,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
+import java.nio.channels.ConnectionPendingException;
+
 @Autonomous(name="FindLevel")
 public class FindLevel extends LinearOpMode {
     //
@@ -96,13 +98,17 @@ public class FindLevel extends LinearOpMode {
 
         waitForStart();
 
-    liftup(7,.3);
+    liftup(6,.6);
+
+    liftout(20, .5);
+
+    sleep(10000);
     }
 
 
     //Level 3 = 13in
-    //Level 2 =
-    //Level 1 =
+    //Level 2 = 6.2in
+    //Level 1 = 2.3in
     public void liftup(double inches, double speed) {
         int move =  -(int)(Math.round(inches*conversion));
 
@@ -114,5 +120,19 @@ public class FindLevel extends LinearOpMode {
 //            telemetry.addData("Target Position: ", UpandDown.getTargetPosition());
 //            telemetry.update();
 //        }
+    }
+
+    public void liftout(double inches, double speed) {
+        int move =  (int)(Math.round(inches*conversion));
+
+        InandOut.setTargetPosition(InandOut.getCurrentPosition() + move);
+        InandOut.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        InandOut.setPower(speed);
+//        while(InandOut.isBusy()){
+//            telemetry.addData("Current Position: ", InandOut.getCurrentPosition());
+//            telemetry.addData("Target Position: ", InandOut.getTargetPosition());
+//            telemetry.update();
+//        }
+
     }
 }
