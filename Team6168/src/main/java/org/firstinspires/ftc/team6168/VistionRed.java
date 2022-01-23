@@ -95,7 +95,7 @@ public class VistionRed extends LinearOpMode {
         telemetry.addData("Angle: ", gyro.getIntegratedZValue());
         telemetry.update();
 
-        grabber.setPosition(.9);
+        grabber.setPosition(1);
 
         waitForStart();
 
@@ -117,44 +117,58 @@ public class VistionRed extends LinearOpMode {
 
             sleep(500);
 
-            Spinner.setPower(-.9);
-            sleep(4000);
-            Spinner.setPower(0);
+            gyroTurn(TURN_SPEED, -2);
 
-            strafeToPosition(5, DRIVE_SPEED);
+            strafeToPosition(10, DRIVE_SPEED);
 
-            liftup(2.15, .6);
+            gyroDrive(DRIVE_SPEED,1, 1,1,1,0);
 
-            gyroDrive(DRIVE_SPEED, -25, -25, -25, -25, 0);
+            strafeToPosition(14, DRIVE_SPEED);
 
-            gyroTurn(.8, 90);
+            gyroTurn(TURN_SPEED,10);
 
-            gyroDrive(.2, -5.5, -5.5, -5.5, -5.5, 90);
+            liftup(2.1,.3);
 
-            liftout(8, .9);
+            gyroDrive(.3, -12.1, -12.1, -12.1, -12.1,10);
+
+            liftout(16,.9);
+
+            sleep(500);
 
             open();
+
+            gyroDrive(DRIVE_SPEED,5.4,5.4,5.4,5.4,10);
+
+            gyroTurn(TURN_SPEED, -80);
+
+            liftup(-2.05,.7);
+
+            gyroDrive(DRIVE_SPEED,-2.3,-2.3,-2.3,-2.3,-90);
+
             sleep(500);
+
             close();
 
-            sleep(500);
+            liftup(1,.7);
 
-            liftout(-5, 1);
+            gyroTurn(TURN_SPEED, 10);
 
-            gyroDrive(DRIVE_SPEED, 4, 4, 4, 4, 90);
+            liftup(1.2,.7);
 
-            liftup(-2.15, .6);
+            gyroDrive(.3,-4,-4,-4,-4,10);
 
-            strafeToPosition(32, DRIVE_SPEED);
+            liftout(10,.9);
 
-            gyroDrive(.4, -7, -7, -7, -7, 90);
+            open();
 
-            sleep(7000);
+            liftout(-15,.9);
 
+            gyroDrive(DRIVE_SPEED,17,17,17,17,0);
+
+            strafeToPosition(-10, DRIVE_SPEED);
         }
 
-
-        if(detector.boxCenter){
+        else if(detector.boxCenter){
 
             strafeToPosition(6, DRIVE_SPEED);
 
@@ -200,7 +214,7 @@ public class VistionRed extends LinearOpMode {
 
         }
 
-        if(detector.boxRight) {
+        else {
 
             strafeToPosition(6, DRIVE_SPEED);
 
@@ -282,7 +296,7 @@ public class VistionRed extends LinearOpMode {
 //            telemetry.addData("Target Position: ", InandOut.getTargetPosition());
 //            telemetry.update();
         }
-        grabber.setPosition(.5);
+        grabber.setPosition(.8);
     }
 
     public void close(){
