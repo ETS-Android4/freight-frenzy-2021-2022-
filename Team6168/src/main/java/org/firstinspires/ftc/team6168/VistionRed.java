@@ -113,6 +113,133 @@ public class VistionRed extends LinearOpMode {
 
             gyroTurn(TURN_SPEED, 15);
 
+            gyroDrive(.2, 9.7, 9.7, 9.7, 9.7, 15);
+
+            sleep(500);
+
+            Spinner.setPower(-.9);
+            sleep(3000);
+            Spinner.setPower(0);
+
+            gyroTurn(TURN_SPEED, -2);
+
+            strafeToPosition(10, DRIVE_SPEED);
+
+            gyroDrive(DRIVE_SPEED,1, 1,1,1,0);
+
+            strafeToPosition(14, DRIVE_SPEED);
+
+            gyroTurn(TURN_SPEED,10);
+
+            liftup(2.3,.3);
+
+            gyroDrive(.3, -12.1, -12.1, -12.1, -12.1,10);
+
+            liftout(16,.9);
+
+            sleep(500);
+
+            open();
+
+            gyroDrive(DRIVE_SPEED,5.2,5.2,5.2,5.2,10);
+
+            gyroTurn(TURN_SPEED, -80);
+
+            liftup(-2.2,.7);
+
+            gyroDrive(DRIVE_SPEED,-2.3,-2.3,-2.3,-2.3,-90);
+
+            sleep(500);
+
+            close();
+
+            liftup(10,.7);
+
+            gyroTurn(TURN_SPEED, 10);
+
+            liftup(3,.7);
+
+            gyroDrive(.3,-5.75,-5.75,-5.75,-5.75,10);
+
+            liftout(5,.9);
+
+            open();
+
+            liftout(-16,1);
+
+            liftup(-11, 1);
+
+            gyroDrive(.6,18,18,18,18,0);
+
+            close();
+
+            strafeToPosition(-10, .6);
+        }
+
+        else if(detector.boxCenter){
+
+            strafeToPosition(6, DRIVE_SPEED);
+
+            gyroTurn(TURN_SPEED, 15);
+
+            gyroDrive(.2, 9.7, 9.7, 9.7, 9.7, 15);
+
+            sleep(500);
+
+//            Spinner.setPower(-.9);
+//            sleep(3000);
+//            Spinner.setPower(0);
+
+            gyroTurn(TURN_SPEED, -2);
+
+            strafeToPosition(24, DRIVE_SPEED);
+
+            liftup(6.2,.5);
+
+            gyroDrive(.3, -11.25, -11.25, -11.25, -11.25,0);
+
+            liftout(18,.9);
+
+            sleep(500);
+
+            open();
+
+            gyroDrive(DRIVE_SPEED,1.7,1.7,1.7,1.7,0);
+
+            liftup(-6,.4);
+
+            gyroTurn(TURN_SPEED, -80);
+
+            close();
+//
+//            liftup(10,.7);
+//
+//            gyroTurn(TURN_SPEED, 10);
+//
+//            liftup(3,.7);
+//
+//            liftout(5,.9);
+//
+//            open();
+//
+//            liftout(-16,1);
+//
+//            liftup(-11, 1);
+//
+//            gyroDrive(.6,18,18,18,18,0);
+//
+//            close();
+//
+//            strafeToPosition(-10, .6);
+
+        }
+
+        else {
+
+            strafeToPosition(6, DRIVE_SPEED);
+
+            gyroTurn(TURN_SPEED, 15);
+
             gyroDrive(.2, 9.75, 9.75, 9.75, 9.75, 15);
 
             sleep(500);
@@ -137,127 +264,6 @@ public class VistionRed extends LinearOpMode {
 
             open();
 
-            gyroDrive(DRIVE_SPEED,5.4,5.4,5.4,5.4,10);
-
-            gyroTurn(TURN_SPEED, -80);
-
-            liftup(-2.05,.7);
-
-            gyroDrive(DRIVE_SPEED,-2.3,-2.3,-2.3,-2.3,-90);
-
-            sleep(500);
-
-            close();
-
-            liftup(1,.7);
-
-            gyroTurn(TURN_SPEED, 10);
-
-            liftup(1.2,.7);
-
-            gyroDrive(.3,-4,-4,-4,-4,10);
-
-            liftout(10,.9);
-
-            open();
-
-            liftout(-15,.9);
-
-            gyroDrive(DRIVE_SPEED,17,17,17,17,0);
-
-            strafeToPosition(-10, DRIVE_SPEED);
-        }
-
-        else if(detector.boxCenter){
-
-            strafeToPosition(6, DRIVE_SPEED);
-
-            gyroTurn(TURN_SPEED, 15);
-
-            gyroDrive(.2, 9.75, 9.75, 9.75, 9.75, 15);
-
-            sleep(500);
-
-            Spinner.setPower(-.9);
-            sleep(4000);
-            Spinner.setPower(0);
-
-            strafeToPosition(5, DRIVE_SPEED);
-
-            liftup(5.75, .6);
-
-            gyroDrive(DRIVE_SPEED, -25, -25, -25, -25, 0);
-
-            gyroTurn(.8, 90);
-
-            gyroDrive(.2, -5.5, -5.5, -5.5, -5.5, 90);
-
-            liftout(17, .9);
-
-            open();
-            sleep(500);
-            close();
-
-            sleep(500);
-
-            liftout(-15, 1);
-
-            gyroDrive(DRIVE_SPEED, 4, 4, 4, 4, 90);
-
-            liftup(-5.75, .6);
-
-            strafeToPosition(32, DRIVE_SPEED);
-
-            gyroDrive(.4, -7, -7, -7, -7, 90);
-
-            sleep(7000);
-
-        }
-
-        else {
-
-            strafeToPosition(6, DRIVE_SPEED);
-
-            gyroTurn(TURN_SPEED, 15);
-
-            gyroDrive(.2, 9.75, 9.75, 9.75, 9.75, 15);
-
-            sleep(500);
-
-            Spinner.setPower(-.9);
-            sleep(4000);
-            Spinner.setPower(0);
-
-            strafeToPosition(5, DRIVE_SPEED);
-
-            liftup(13, .6);
-
-            gyroDrive(DRIVE_SPEED, -25, -25, -25, -25, 0);
-
-            gyroTurn(.8, 90);
-
-            gyroDrive(.2, -5.5, -5.5, -5.5, -5.5, 90);
-
-            liftout(21, .9);
-
-            open();
-            sleep(500);
-            close();
-
-            sleep(500);
-
-            liftout(-20, 1);
-
-            gyroDrive(DRIVE_SPEED, 4, 4, 4, 4, 90);
-
-            liftup(-13, .6);
-
-            strafeToPosition(32, DRIVE_SPEED);
-
-            gyroDrive(.4, -7, -7, -7, -7, 90);
-
-            sleep(2000);
-
         }
     }
 
@@ -269,11 +275,6 @@ public class VistionRed extends LinearOpMode {
         UpandDown.setTargetPosition(UpandDown.getCurrentPosition() + move);
         UpandDown.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         UpandDown.setPower(speed);
-//        while(UpandDown.isBusy()){
-//            telemetry.addData("Current Position: ", UpandDown.getCurrentPosition());
-//            telemetry.addData("Target Position: ", UpandDown.getTargetPosition());
-//            telemetry.update();
-//        }
     }
 
     public void liftout(double inches, double speed) {
@@ -282,19 +283,10 @@ public class VistionRed extends LinearOpMode {
         InandOut.setTargetPosition(InandOut.getCurrentPosition() + move);
         InandOut.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         InandOut.setPower(speed);
-//        while(InandOut.isBusy()){
-//            telemetry.addData("Current Position: ", InandOut.getCurrentPosition());
-//            telemetry.addData("Target Position: ", InandOut.getTargetPosition());
-//            telemetry.update();
-//        }
-
     }
 
     public void open(){
         while(InandOut.isBusy() || UpandDown.isBusy()){
-//            telemetry.addData("Current Position: ", InandOut.getCurrentPosition());
-//            telemetry.addData("Target Position: ", InandOut.getTargetPosition());
-//            telemetry.update();
         }
         grabber.setPosition(.8);
     }
