@@ -186,51 +186,57 @@ public class VistionRed extends LinearOpMode {
 
             sleep(500);
 
-//            Spinner.setPower(-.9);
-//            sleep(3000);
-//            Spinner.setPower(0);
+            Spinner.setPower(-.9);
+            sleep(3000);
+            Spinner.setPower(0);
 
             gyroTurn(TURN_SPEED, -2);
 
             strafeToPosition(24, DRIVE_SPEED);
 
-            liftup(6.2,.5);
+            liftup(6.05,.5);
 
-            gyroDrive(.3, -11.25, -11.25, -11.25, -11.25,0);
+            gyroDrive(.3, -11.3, -11.3, -11.3, -11.3,0);
 
-            liftout(18,.9);
+            liftout(23,.9);
 
             sleep(500);
 
             open();
 
-            gyroDrive(DRIVE_SPEED,1.7,1.7,1.7,1.7,0);
+            gyroDrive(DRIVE_SPEED,1.75,1.75,1.75,1.75,0);
 
-            liftup(-6,.4);
+            liftup(-6,.5);
 
             gyroTurn(TURN_SPEED, -80);
 
+            sleep(500);
+
             close();
-//
-//            liftup(10,.7);
-//
-//            gyroTurn(TURN_SPEED, 10);
-//
-//            liftup(3,.7);
-//
-//            liftout(5,.9);
-//
-//            open();
-//
-//            liftout(-16,1);
-//
-//            liftup(-11, 1);
-//
-//            gyroDrive(.6,18,18,18,18,0);
-//
-//            close();
-//
-//            strafeToPosition(-10, .6);
+
+            liftup(11.75, .9);
+
+            gyroTurn(TURN_SPEED, 6);
+
+            liftout(7, .9);
+
+            sleep(500);
+
+            gyroDrive(DRIVE_SPEED, -2.2,-2.2,-2.2,-2.2, 0);
+
+            open();
+
+            liftout(-20,1);
+
+            liftup(-11, .8);
+
+            gyroDrive(.5,16,16,16,16,0);
+
+            close();
+
+            strafeToPosition(-10, .6);
+
+            sleep(1000);
 
         }
 
@@ -240,29 +246,29 @@ public class VistionRed extends LinearOpMode {
 
             gyroTurn(TURN_SPEED, 15);
 
-            gyroDrive(.2, 9.75, 9.75, 9.75, 9.75, 15);
+            gyroDrive(.2, 9.7, 9.7, 9.7, 9.7, 15);
 
             sleep(500);
 
+            Spinner.setPower(-.9);
+            sleep(3000);
+            Spinner.setPower(0);
+
             gyroTurn(TURN_SPEED, -2);
 
-            strafeToPosition(10, DRIVE_SPEED);
+            strafeToPosition(24, DRIVE_SPEED);
 
-            gyroDrive(DRIVE_SPEED,1, 1,1,1,0);
+            liftup(11.75,.5);
 
-            strafeToPosition(14, DRIVE_SPEED);
+            gyroDrive(.3, -11.3, -11.3, -11.3, -11.3,0);
 
-            gyroTurn(TURN_SPEED,10);
-
-            liftup(2.1,.3);
-
-            gyroDrive(.3, -12.1, -12.1, -12.1, -12.1,10);
-
-            liftout(16,.9);
+            liftout(23,.9);
 
             sleep(500);
 
             open();
+
+            gyroTurn(-50, .3);
 
         }
     }
