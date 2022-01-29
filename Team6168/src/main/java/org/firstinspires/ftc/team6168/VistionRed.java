@@ -256,20 +256,49 @@ public class VistionRed extends LinearOpMode {
 
             gyroTurn(TURN_SPEED, -2);
 
-            strafeToPosition(24, DRIVE_SPEED);
+            strafeToPosition(25, DRIVE_SPEED);
 
-            liftup(11.75,.5);
+            liftup(11.75,.7);
 
-            gyroDrive(.3, -11.3, -11.3, -11.3, -11.3,0);
+            gyroDrive(.3, -11.9, -11.9, -11.9, -11.9,0);
 
-            liftout(23,.9);
+            liftout(24,.9);
 
             sleep(500);
 
             open();
 
-            gyroTurn(-50, .3);
+            gyroDrive(.3, 1.6, 1.6, 1.6, 1.6,0);
 
+            liftup(-11.5, .8);
+
+            gyroTurn(TURN_SPEED, -53);
+
+            sleep(1500);
+
+            close();
+
+            gyroDrive(.2, 2,2,2,2,-53);
+
+            liftup(11.5, 1);
+
+            gyroTurn(TURN_SPEED, 5);
+
+            gyroDrive(.2, -3,-3,-3,-3,0);
+
+            open();
+
+            sleep(1000);
+
+            liftout(-16,1);
+
+            liftup(-11, 1);
+
+            gyroDrive(.4,16,16,16,16,0);
+
+            close();
+
+            strafeToPosition(-10, .5);
         }
     }
 
