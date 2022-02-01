@@ -94,13 +94,13 @@ public class BluePlacerWarehouse extends LinearOpMode {
         telemetry.addData("Angle: ", gyro.getIntegratedZValue());
         telemetry.update();
 
-        grabber.setPosition(.9);
+        grabber.setPosition(1);
 
         waitForStart();
 
-        liftout(19,.3);
+        liftout(23,.7);
 
-        strafeToPosition(-3,.3);
+        strafeToPosition(-3.5,.3);
 
         liftup(13,1);
 
@@ -108,13 +108,13 @@ public class BluePlacerWarehouse extends LinearOpMode {
 
         open();
 
-        sleep(1000);
+        sleep(500);
 
         close();
 
-        liftout(-17.5,.3);
+        liftout(-21,1);
 
-        liftup(-13,.3);
+        liftup(-12.5,.5);
 
         gyroDrive(DRIVE_SPEED,11.3,11.3,11.3,11.3,0);
 
@@ -122,7 +122,7 @@ public class BluePlacerWarehouse extends LinearOpMode {
 
         strafeToPosition(3,.2);
 
-        gyroDrive(DRIVE_SPEED,-27,-27,-27,-27,90);
+        gyroDrive(DRIVE_SPEED,-30,-30,-30,-30,90);
     }
 
     public void liftup(double inches, double speed) {

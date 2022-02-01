@@ -41,8 +41,8 @@ public class AutoBlueCarousel extends LinearOpMode {
     static final double P_TURN_COEFF = 0.1;     // Larger is more responsive, but also less stable
     static final double P_DRIVE_COEFF = 0.07;     // Larger is more responsive, but also less stable
 
-    double DRIVE_SPEED = 0.2;
-    double TURN_SPEED = 0.2;
+    double DRIVE_SPEED = 0.4;
+    double TURN_SPEED = 0.4;
     //
     Double conversion = cpi * bias;
     Boolean exit = false;
@@ -79,19 +79,19 @@ public class AutoBlueCarousel extends LinearOpMode {
 
         gyroTurn(TURN_SPEED, -15);
 
-        gyroDrive(DRIVE_SPEED,9.6,9.6,9.6,9.6, -15);
+        gyroDrive(.1,9.4,9.4,9.4,9.4, -15);
 
         sleep(500);
 
         Spinner.setPower(.9);
-        sleep(4000);
+        sleep(3000);
         Spinner.setPower(0);
 
-        gyroTurn(TURN_SPEED, 60);
+        gyroTurn(TURN_SPEED, 3);
 
-//        strafeToPosition(-16,DRIVE_SPEED);
-//
-//        gyroDrive(DRIVE_SPEED,5,5,5,5,0);
+        strafeToPosition(-16,DRIVE_SPEED);
+
+        gyroDrive(DRIVE_SPEED,4,4,4,4,0);
 
     }
 

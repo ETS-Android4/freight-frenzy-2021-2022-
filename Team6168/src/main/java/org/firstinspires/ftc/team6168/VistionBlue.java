@@ -112,9 +112,13 @@ public class VistionBlue extends LinearOpMode {
 
             gyroTurn(TURN_SPEED, -15);
 
-            gyroDrive(.2, 9.75, 9.75, 9.75, 9.75, 15);
+            gyroDrive(.2, 9.7, 9.7, 9.7, 9.7, -15);
 
             sleep(500);
+
+            Spinner.setPower(.9);
+            sleep(3000);
+            Spinner.setPower(0);
 
             gyroTurn(TURN_SPEED, 2);
 
@@ -128,7 +132,7 @@ public class VistionBlue extends LinearOpMode {
 
             liftup(2.3,.3);
 
-            gyroDrive(.3, -12.1, -12.1, -12.1, -12.1,10);
+            gyroDrive(.3, -12.1, -12.1, -12.1, -12.1,-10);
 
             liftout(16,.9);
 
@@ -136,11 +140,11 @@ public class VistionBlue extends LinearOpMode {
 
             open();
 
-            gyroDrive(DRIVE_SPEED,5.4,5.4,5.4,5.4,10);
+            gyroDrive(DRIVE_SPEED,5.2,5.2,5.2,5.2,-10);
 
             gyroTurn(TURN_SPEED, 80);
 
-            liftup(-2.05,.7);
+            liftup(-2.2,.7);
 
             gyroDrive(DRIVE_SPEED,-2.3,-2.3,-2.3,-2.3,90);
 
@@ -148,23 +152,27 @@ public class VistionBlue extends LinearOpMode {
 
             close();
 
-            liftup(1,.7);
+            liftup(10,.7);
 
             gyroTurn(TURN_SPEED, -10);
 
-            liftup(1.2,.7);
+            liftup(3,.7);
 
-            gyroDrive(.3,-4,-4,-4,-4,-10);
+            gyroDrive(.3,-5.75,-5.75,-5.75,-5.75,-10);
 
             liftout(5,.9);
 
             open();
 
-            liftout(-23,1);
+            liftout(-16,1);
 
-            gyroDrive(DRIVE_SPEED,17,17,17,17,0);
+            liftup(-11, 1);
 
-            strafeToPosition(-10, DRIVE_SPEED);
+            gyroDrive(.6,18,18,18,18,0);
+
+            close();
+
+            strafeToPosition(10, .6);
         }
 
         else if(detector.boxCenter){

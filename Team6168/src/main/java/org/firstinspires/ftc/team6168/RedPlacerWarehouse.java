@@ -94,17 +94,19 @@ public class RedPlacerWarehouse extends LinearOpMode {
         telemetry.addData("Angle: ", gyro.getIntegratedZValue());
         telemetry.update();
 
-        grabber.setPosition(.9);
+        grabber.setPosition(1);
 
         waitForStart();
 
-        liftout(18,.3);
+        liftout(23,.7);
 
-        strafeToPosition(3.3,.3);
+        strafeToPosition(4,.3);
 
         liftup(13,1);
 
         gyroDrive(DRIVE_SPEED,-10.3,-10.3,-10.3,-10.3,0);
+
+        sleep(500);
 
         open();
 
@@ -112,17 +114,15 @@ public class RedPlacerWarehouse extends LinearOpMode {
 
         close();
 
-        liftout(-17.5,.3);
+        liftout(-16,1);
 
-        liftup(-13,.3);
+        liftup(-11, 1);
 
-        gyroDrive(DRIVE_SPEED,11.3,11.3,11.3,11.3,0);
+        gyroDrive(.6,18,18,18,18,0);
 
-        gyroTurn(TURN_SPEED, -85);
+        close();
 
-        strafeToPosition(-3.2,.2);
-
-        gyroDrive(DRIVE_SPEED,-27,-27,-27,-27,-85);
+        strafeToPosition(-10, .6);
     }
 
     public void liftup(double inches, double speed) {
