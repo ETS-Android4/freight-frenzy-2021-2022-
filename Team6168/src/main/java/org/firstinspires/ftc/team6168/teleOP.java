@@ -214,9 +214,5 @@ public class teleOP extends OpMode {
         }else{
             UpandDown.setPower(0);
         }
-
-
     }
-
-
 }

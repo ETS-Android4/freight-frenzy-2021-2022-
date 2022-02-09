@@ -18,8 +18,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="GlassesRed")
-public class GlassesRed extends LinearOpMode {
+@Autonomous(name="GogglesRed")
+public class GogglesRed extends LinearOpMode {
     //
     DcMotor frontleft;
     DcMotor frontright;
@@ -113,7 +113,7 @@ public class GlassesRed extends LinearOpMode {
 
             gyroTurn(TURN_SPEED, 15);
 
-            gyroDrive(.2, 9.7, 9.7, 9.7, 9.7, 15);
+            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, 15);
 
             sleep(500);
 
@@ -125,7 +125,7 @@ public class GlassesRed extends LinearOpMode {
 
             strafeToPosition(10, DRIVE_SPEED);
 
-            gyroDrive(DRIVE_SPEED,1, 1,1,1,0);
+            gyroDrive(DRIVE_SPEED,1.5, 1.5,1.5,1.5,0);
 
             strafeToPosition(14, DRIVE_SPEED);
 
@@ -133,17 +133,17 @@ public class GlassesRed extends LinearOpMode {
 
             liftup(2.3,.3);
 
-            gyroDrive(.2, -12.2, -12.2, -12.2, -12.2,10);
+            gyroDrive(.2, -13.5, -13.5, -13.5, -13.5,10);
 
-            liftout(16,.9);
+            liftout(15,.9);
 
             sleep(500);
 
             open();
 
-            liftout(-16,1);
+            liftout(-13,1);
 
-            liftup(-2, .5);
+            liftup(-2, .2);
 
             gyroDrive(.4,18,18,18,18,0);
 
@@ -158,7 +158,7 @@ public class GlassesRed extends LinearOpMode {
 
             gyroTurn(TURN_SPEED, 15);
 
-            gyroDrive(.2, 9.7, 9.7, 9.7, 9.7, 15);
+            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, 15);
 
             sleep(500);
 
@@ -198,7 +198,7 @@ public class GlassesRed extends LinearOpMode {
 
             gyroTurn(TURN_SPEED, 15);
 
-            gyroDrive(.2, 9.7, 9.7, 9.7, 9.7, 15);
+            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, 15);
 
             sleep(500);
 
@@ -222,7 +222,7 @@ public class GlassesRed extends LinearOpMode {
 
             liftout(-20,1);
 
-            liftup(-12.5, .4);
+            liftup(-10, .4);
 
             gyroDrive(.5,16,16,16,16,0);
 
