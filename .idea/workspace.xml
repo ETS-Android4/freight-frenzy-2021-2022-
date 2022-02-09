@@ -23,13 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5d66c9d-0e56-4609-a91c-6b9cdb73f635" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/GlassesRed.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/GogglesBlue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/AutoBlueCarousel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/AutoBlueCarousel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/AutoRedCarousel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/AutoRedCarousel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/BluePlacerWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/BluePlacerWarehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/RedPlacerWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/RedPlacerWarehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/VistionBlue.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/VistionBlue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/GlassesRed.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/GogglesRed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/teleOP.java" beforeDir="false" afterPath="$PROJECT_DIR$/Team6168/src/main/java/org/firstinspires/ftc/team6168/teleOP.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
