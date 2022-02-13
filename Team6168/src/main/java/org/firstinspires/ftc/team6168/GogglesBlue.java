@@ -123,33 +123,29 @@ public class GogglesBlue extends LinearOpMode {
 
             gyroTurn(TURN_SPEED, 2);
 
-            strafeToPosition(-10, DRIVE_SPEED);
+            strafeToPosition(-21, DRIVE_SPEED);
 
-            gyroDrive(DRIVE_SPEED,1.5, 1.5,1.5,1.5,0);
+            liftup(11,.5);
 
-            strafeToPosition(14, DRIVE_SPEED);
+            gyroDrive(.3, -13.5, -13.5, -13.5, -13.5,0);
 
-//            gyroTurn(TURN_SPEED,10);
-//
-//            liftup(2.3,.3);
-//
-//            gyroDrive(.2, -13.5, -13.5, -13.5, -13.5,10);
-//
-//            liftout(15,.9);
-//
-//            sleep(500);
-//
-//            open();
-//
-//            liftout(-13,1);
-//
-//            liftup(-2, .2);
-//
-//            gyroDrive(.4,18,18,18,18,0);
-//
-//            close();
-//
-//            strafeToPosition(-12, .4);
+            liftout(23,.9);
+
+            sleep(500);
+
+            open();
+
+            liftout(-20,1);
+
+            liftup(-10, .3);
+
+            gyroDrive(.5,16,16,16,16,0);
+
+            close();
+
+            strafeToPosition(7, .6);
+
+            sleep(2000);
         }
 
         else if(detector.boxCenter){
@@ -168,11 +164,11 @@ public class GogglesBlue extends LinearOpMode {
 
             gyroTurn(TURN_SPEED, 2);
 
-            strafeToPosition(-23, DRIVE_SPEED);
+            strafeToPosition(-21, DRIVE_SPEED);
 
             liftup(6.05,.5);
 
-            gyroDrive(.3, -12, -12, -12, -12,0);
+            gyroDrive(.3, -13, -13, -13, -13,0);
 
             liftout(23,.9);
 
@@ -180,15 +176,17 @@ public class GogglesBlue extends LinearOpMode {
 
             open();
 
-            liftout(-20,1);
+            liftout(-21,1);
 
-            liftup(-11, .3);
+            liftup(-5, .3);
 
             gyroDrive(.5,16,16,16,16,0);
 
             close();
 
-            strafeToPosition(10, .6);
+            strafeToPosition(5, .6);
+
+            sleep(1000);
 
         }
 
