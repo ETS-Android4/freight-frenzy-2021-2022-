@@ -6,41 +6,31 @@ import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="RedPlacerWarehouse")
-public class RedPlacerWarehouse extends LinearOpMode {
-    //
+@Autonomous(name="AutoRedSharedWarehouse", group="chad")
+public class AutoRedSharedWarehouse extends LinearOpMode {
+
     DcMotor frontleft;
     DcMotor frontright;
     DcMotor backleft;
     DcMotor backright;
-    DcMotor Spinner;
-    DcMotor InandOut;
-    DcMotorEx UpandDown;
-
-    Servo grabber;
 
     ModernRoboticsI2cGyro gyro;
-
-
     //28 * 20 / (2ppi * 4.125)
     Double width = 16.0; //inches
     Integer cpr = 28; //counts per rotation
     Integer gearratio = 40;
     Double diameter = 4.125;
-    Double cpi = (cpr * gearratio)/(Math.PI * diameter); //counts per inch, 28cpr * gear ratio / (2 * pi * diameter (in inches, in the center))
+    Double cpi = (cpr * gearratio) / (Math.PI * diameter); //counts per inch, 28cpr * gear ratio / (2 * pi * diameter (in inches, in the center))
     Double bias = 0.8;//default 0.8
     Double meccyBias = 0.9;//change to adjust only strafing movement
     double amountError = 2;
@@ -50,7 +40,7 @@ public class RedPlacerWarehouse extends LinearOpMode {
     static final double P_DRIVE_COEFF = 0.07;     // Larger is more responsive, but also less stable
 
     double DRIVE_SPEED = 0.3;
-    double TURN_SPEED = 0.5;
+    double TURN_SPEED = 0.4;
 
     Double conversion = cpi * bias;
     Boolean exit = false;
@@ -59,32 +49,20 @@ public class RedPlacerWarehouse extends LinearOpMode {
     Orientation angles;
     Acceleration gravity;
 
-    public void runOpMode(){
+    public void runOpMode() {
 
+        //
         initGyro();
-
+        //
         frontleft = hardwareMap.dcMotor.get("Frontleft");
         frontright = hardwareMap.dcMotor.get("Frontright");
         backleft = hardwareMap.dcMotor.get("Backleft");
         backright = hardwareMap.dcMotor.get("Backright");
-        InandOut = hardwareMap.get(DcMotor.class, "InandOut");
-        UpandDown = hardwareMap.get(DcMotorEx.class, "UpandDown");
         DcMotor[] motors = {frontleft, frontright, backleft, backright};
-        Spinner = hardwareMap.dcMotor.get("Car");
         gyro = hardwareMap.get(ModernRoboticsI2cGyro.class, "Gyro");
-        grabber = hardwareMap.get(Servo.class, "Grabber");
 
         frontright.setDirection(DcMotorSimple.Direction.REVERSE);
         backright.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        InandOut.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        UpandDown.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-
-        InandOut.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        UpandDown.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
 
         telemetry.addLine("Start Gyro");
         telemetry.update();
@@ -93,77 +71,19 @@ public class RedPlacerWarehouse extends LinearOpMode {
         telemetry.addLine("Gyro Calibrated");
         telemetry.addData("Angle: ", gyro.getIntegratedZValue());
         telemetry.update();
-
-        grabber.setPosition(1);
-
         waitForStart();
 
-        liftout(23,.7);
+        gyroDrive(DRIVE_SPEED, 15, 15, 15, 15,0);
 
-        strafeToPosition(4,.3);
-
-        liftup(12,1);
-
-        gyroDrive(DRIVE_SPEED,-10.3,-10.3,-10.3,-10.3,0);
-
-        open();
-
-        sleep(500);
-
-        close();
-
-        liftout(-21,1);
-
-        liftup(-11,.5);
-
-        gyroDrive(DRIVE_SPEED,11.3,11.3,11.3,11.3,0);
+        strafeToPosition(-17, DRIVE_SPEED);
 
         gyroTurn(TURN_SPEED, -90);
 
-        strafeToPosition(-3,.2);
-
-        gyroDrive(DRIVE_SPEED, -32, -32, -32, -32,-90);
-    }
-
-    public void liftup(double inches, double speed) {
-        int move =  -(int)(Math.round(inches*conversion));
-
-        UpandDown.setTargetPosition(UpandDown.getCurrentPosition() + move);
-        UpandDown.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        UpandDown.setPower(speed);
-//        while(UpandDown.isBusy()){
-//            telemetry.addData("Current Position: ", UpandDown.getCurrentPosition());
-//            telemetry.addData("Target Position: ", UpandDown.getTargetPosition());
-//            telemetry.update();
-//        }
-    }
-
-    public void liftout(double inches, double speed) {
-        int move =  (int)(Math.round(inches*conversion));
-
-        InandOut.setTargetPosition(InandOut.getCurrentPosition() + move);
-        InandOut.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        InandOut.setPower(speed);
-//        while(InandOut.isBusy()){
-//            telemetry.addData("Current Position: ", InandOut.getCurrentPosition());
-//            telemetry.addData("Target Position: ", InandOut.getTargetPosition());
-//            telemetry.update();
-//        }
+        strafeToPosition(-17, DRIVE_SPEED);
 
     }
 
-    public void open(){
-        while(InandOut.isBusy() || UpandDown.isBusy()){
-            telemetry.addData("Current Position: ", InandOut.getCurrentPosition());
-            telemetry.addData("Target Position: ", InandOut.getTargetPosition());
-            telemetry.update();
-        }
-        grabber.setPosition(.5);
-    }
 
-    public void close(){
-        grabber.setPosition(1);
-    }
 
     public void turnWithGyro(double degrees, double speedDirection){
         //<editor-fold desc="Initialize">
@@ -272,7 +192,11 @@ public class RedPlacerWarehouse extends LinearOpMode {
         backleft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backright.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
-
+    //
+    /*
+    This function uses the encoders to strafe left or right.
+    Negative input for inches results in left strafing.
+     */
     public void strafeToPosition(double inches, double speed){
         //
         int move = (int)(Math.round(inches * cpi * meccyBias));
@@ -299,14 +223,25 @@ public class RedPlacerWarehouse extends LinearOpMode {
         backleft.setPower(0);
         return;
     }
-
+    //
+    /*
+    A tradition within the Thunder Pengwins code, we always start programs with waitForStartify,
+    our way of adding personality to our programs.
+     */
+    public void waitForStartify(){
+        waitForStart();
+    }
+    //
+    /*
+    These functions are used in the turnWithGyro function to ensure inputs
+    are interpreted properly.
+     */
     public double devertify(double degrees){
         if (degrees < 0){
             degrees = degrees + 360;
         }
         return degrees;
     }
-
     public double convertify(double degrees){
         if (degrees > 179){
             degrees = -(360 - degrees);
@@ -317,7 +252,11 @@ public class RedPlacerWarehouse extends LinearOpMode {
         }
         return degrees;
     }
-
+    //
+    /*
+    This function is called at the beginning of the program to activate
+    the IMU Integrated Gyro.
+     */
     public void initGyro(){
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
@@ -330,7 +269,11 @@ public class RedPlacerWarehouse extends LinearOpMode {
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
     }
-
+    //
+    /*
+    This function is used in the turnWithGyro function to set the
+    encoder mode and turn.
+     */
     public void turnWithEncoder(double input){
         frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -458,7 +401,6 @@ public class RedPlacerWarehouse extends LinearOpMode {
             backright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
-
     public void gyroTurn ( double speed, double angle){
         frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -474,6 +416,18 @@ public class RedPlacerWarehouse extends LinearOpMode {
         frontright.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backright.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
+
+    /**
+     *  Method to obtain & hold a heading for a finite amount of time
+     *  Move will stop once the requested time has elapsed
+     *
+     * @param speed      Desired speed of turn.
+     * @param angle      Absolute Angle (in Degrees) relative to last gyro reset.
+     *                   0 = fwd. +ve is CCW from fwd. -ve is CW from forward.
+     *                   If a relative angle is required, add/subtract from current heading.
+     * @param holdTime   Length of time (in seconds) to hold the specified heading.
+     */
+
 
     public void gyroHold ( double speed, double angle, double holdTime){
 
@@ -496,6 +450,17 @@ public class RedPlacerWarehouse extends LinearOpMode {
         frontright.setPower(0);
     }
 
+
+    /**
+     * Perform one cycle of closed loop heading control.
+     *
+     * @param speed     Desired speed of turn.
+     * @param angle     Absolute Angle (in Degrees) relative to last gyro reset.
+     *                  0 = fwd. +ve is CCW from fwd. -ve is CW from forward.
+     *                  If a relative angle is required, add/subtract from current heading.
+     * @param PCoeff    Proportional Gain coefficient
+     * @return
+     */
     boolean onHeading ( double speed, double angle, double PCoeff){
         double error;
         double steer;
@@ -531,6 +496,12 @@ public class RedPlacerWarehouse extends LinearOpMode {
         return onTarget;
     }
 
+    /**
+     * getError determines the error between the target angle and the robot's current heading
+     * @param   targetAngle  Desired angle (relative to global reference established at last Gyro Reset).
+     * @return error angle: Degrees in the range +/- 180. Centered on the robot's frame of reference
+     *          +ve error means the robot should turn LEFT (CCW) to reduce error.
+     */
     public double getError ( double targetAngle){
 
         double robotError;
@@ -542,6 +513,12 @@ public class RedPlacerWarehouse extends LinearOpMode {
         return -robotError;
     }
 
+    /**
+     * returns desired steering force.  +/- 1 range.  +ve = steer left
+     * @param error   Error angle in robot relative degrees
+     * @param PCoeff  Proportional Gain Coefficient
+     * @return
+     */
     public double getSteer ( double error, double PCoeff){
         return Range.clip(error * PCoeff, -DRIVE_SPEED, 1);
     }

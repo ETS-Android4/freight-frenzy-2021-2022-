@@ -18,8 +18,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="GogglesBlue")
-public class GogglesBlue extends LinearOpMode {
+@Autonomous(name="CarouselRed")
+public class CarouselRed extends LinearOpMode {
     //
     DcMotor frontleft;
     DcMotor frontright;
@@ -83,7 +83,7 @@ public class GogglesBlue extends LinearOpMode {
         InandOut.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         UpandDown.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        BlueDuckDetector detector = new BlueDuckDetector(this);
+        RedDuckDetector detector = new RedDuckDetector(this);
 
 
 
@@ -109,25 +109,70 @@ public class GogglesBlue extends LinearOpMode {
 
         if(detector.boxLeft){
 
-            strafeToPosition(-6, DRIVE_SPEED);
+            strafeToPosition(6, DRIVE_SPEED);
 
-            gyroTurn(TURN_SPEED, -15);
+            gyroTurn(TURN_SPEED, 15);
 
-            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, -15);
+            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, 15);
 
             sleep(500);
 
-            Spinner.setPower(.9);
+            Spinner.setPower(-.9);
             sleep(3000);
             Spinner.setPower(0);
 
-            gyroTurn(TURN_SPEED, 2);
+            gyroTurn(TURN_SPEED, -2);
 
-            strafeToPosition(-21, DRIVE_SPEED);
+            strafeToPosition(10, DRIVE_SPEED);
 
-            liftup(11,.5);
+            gyroDrive(DRIVE_SPEED,1.5, 1.5,1.5,1.5,0);
 
-            gyroDrive(.3, -13.5, -13.5, -13.5, -13.5,0);
+            strafeToPosition(14, DRIVE_SPEED);
+
+            gyroTurn(TURN_SPEED,10);
+
+            liftup(2.3,.3);
+
+            gyroDrive(.2, -13.5, -13.5, -13.5, -13.5,10);
+
+            liftout(15,.9);
+
+            sleep(500);
+
+            open();
+
+            liftout(-13,1);
+
+            liftup(-2, .2);
+
+            gyroDrive(.4,18,18,18,18,0);
+
+            close();
+
+            strafeToPosition(-12, .4);
+        }
+
+        else if(detector.boxCenter){
+
+            strafeToPosition(6, DRIVE_SPEED);
+
+            gyroTurn(TURN_SPEED, 15);
+
+            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, 15);
+
+            sleep(500);
+
+            Spinner.setPower(-.9);
+            sleep(3000);
+            Spinner.setPower(0);
+
+            gyroTurn(TURN_SPEED, -2);
+
+            strafeToPosition(25, DRIVE_SPEED);
+
+            liftup(6.05,.5);
+
+            gyroDrive(.3, -11.3, -11.3, -11.3, -11.3,0);
 
             liftout(23,.9);
 
@@ -137,38 +182,37 @@ public class GogglesBlue extends LinearOpMode {
 
             liftout(-20,1);
 
-            liftup(-10, .3);
+            liftup(-11, .3);
 
             gyroDrive(.5,16,16,16,16,0);
 
             close();
 
-            strafeToPosition(7, .6);
+            strafeToPosition(-10, .6);
 
-            sleep(2000);
         }
 
-        else if(detector.boxCenter){
+        else {
 
-            strafeToPosition(-6, DRIVE_SPEED);
+            strafeToPosition(6, DRIVE_SPEED);
 
-            gyroTurn(TURN_SPEED, -15);
+            gyroTurn(TURN_SPEED, 15);
 
-            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, -15);
+            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, 15);
 
             sleep(500);
 
-            Spinner.setPower(.9);
+            Spinner.setPower(-.9);
             sleep(3000);
             Spinner.setPower(0);
 
-            gyroTurn(TURN_SPEED, 2);
+            gyroTurn(TURN_SPEED, -2);
 
-            strafeToPosition(-21, DRIVE_SPEED);
+            strafeToPosition(25, DRIVE_SPEED);
 
-            liftup(6.05,.5);
+            liftup(11,.5);
 
-            gyroDrive(.3, -13, -13, -13, -13,0);
+            gyroDrive(.3, -12, -12, -12, -12,0);
 
             liftout(23,.9);
 
@@ -176,61 +220,17 @@ public class GogglesBlue extends LinearOpMode {
 
             open();
 
-            liftout(-21,1);
+            liftout(-20,1);
 
-            liftup(-5, .3);
+            liftup(-10, .4);
 
             gyroDrive(.5,16,16,16,16,0);
 
             close();
 
-            strafeToPosition(5, .6);
+            strafeToPosition(-10, .6);
 
-            sleep(1000);
-
-        }
-
-        else {
-
-            strafeToPosition(-6, DRIVE_SPEED);
-
-            gyroTurn(TURN_SPEED, -15);
-
-            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, -15);
-
-            sleep(500);
-
-            Spinner.setPower(.9);
             sleep(3000);
-            Spinner.setPower(0);
-
-            gyroTurn(TURN_SPEED, 2);
-
-            strafeToPosition(-24, DRIVE_SPEED);
-
-            gyroTurn(TURN_SPEED,8);
-
-            liftup(2.3,.3);
-
-            gyroDrive(.2, -13, -13, -13, -13,8);
-
-            liftout(20,.9);
-
-            sleep(500);
-
-            open();
-
-            sleep(1000);
-
-            liftout(-10,.8);
-
-            liftup(-2, .2);
-
-            gyroDrive(.4,18,18,18,18,8);
-
-            close();
-
-            strafeToPosition(8, .4);
         }
     }
 
@@ -255,7 +255,7 @@ public class GogglesBlue extends LinearOpMode {
     public void open(){
         while(InandOut.isBusy() || UpandDown.isBusy()){
         }
-        grabber.setPosition(.75);
+        grabber.setPosition(.8);
     }
 
     public void close(){

@@ -124,11 +124,6 @@ public class BluePlacerWarehouse extends LinearOpMode {
 
         gyroDrive(DRIVE_SPEED, -27, -27, -27, -27,90);
 
-        strafeToPosition(-17, DRIVE_SPEED);
-
-        gyroTurn(TURN_SPEED, -30);
-
-        strafeToPosition(-17, DRIVE_SPEED);
     }
 
     public void liftup(double inches, double speed) {
