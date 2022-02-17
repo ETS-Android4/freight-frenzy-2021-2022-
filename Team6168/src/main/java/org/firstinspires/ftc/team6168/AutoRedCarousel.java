@@ -79,7 +79,7 @@ public class AutoRedCarousel extends LinearOpMode {
 
         gyroTurn(TURN_SPEED, 15);
 
-        gyroDrive(.1,8.9,8.9,8.9,8.9, 15);
+        gyroDrive(.2,9,9,9,9, 15);
 
         sleep(500);
 
