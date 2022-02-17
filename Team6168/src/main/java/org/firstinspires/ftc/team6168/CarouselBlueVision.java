@@ -18,8 +18,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="VistionRed")
-public class VistionRed extends LinearOpMode {
+@Autonomous(name="CarouselBlueVision")
+public class CarouselBlueVision extends LinearOpMode {
     //
     DcMotor frontleft;
     DcMotor frontright;
@@ -83,7 +83,7 @@ public class VistionRed extends LinearOpMode {
         InandOut.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         UpandDown.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        RedDuckDetector detector = new RedDuckDetector(this);
+        BlueDuckDetector detector = new BlueDuckDetector(this);
 
 
 
@@ -107,96 +107,27 @@ public class VistionRed extends LinearOpMode {
         telemetry.addData("leftduckdetected",detector.left_avg);
         telemetry.update();
 
-        if(detector.boxLeft){
+        if(detector.boxRight){
 
-            strafeToPosition(6, DRIVE_SPEED);
+            strafeToPosition(-6, DRIVE_SPEED);
 
-            gyroTurn(TURN_SPEED, 15);
+            gyroTurn(TURN_SPEED, -15);
 
-            gyroDrive(.2, 9.7, 9.7, 9.7, 9.7, 15);
+            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, -15);
 
             sleep(500);
 
-            Spinner.setPower(-.9);
+            Spinner.setPower(.9);
             sleep(3000);
             Spinner.setPower(0);
 
-            gyroTurn(TURN_SPEED, -2);
+            gyroTurn(TURN_SPEED, 2);
 
-            strafeToPosition(10, DRIVE_SPEED);
+            strafeToPosition(-21, DRIVE_SPEED);
 
-            gyroDrive(DRIVE_SPEED,1, 1,1,1,0);
+            liftup(11,.5);
 
-            strafeToPosition(14, DRIVE_SPEED);
-
-            gyroTurn(TURN_SPEED,10);
-
-            liftup(2.3,.3);
-
-            gyroDrive(.3, -12.1, -12.1, -12.1, -12.1,10);
-
-            liftout(16,.9);
-
-            sleep(500);
-
-            open();
-
-            gyroDrive(DRIVE_SPEED,5.2,5.2,5.2,5.2,10);
-
-            gyroTurn(TURN_SPEED, -80);
-
-            liftup(-2.2,.7);
-
-            gyroDrive(DRIVE_SPEED,-2.3,-2.3,-2.3,-2.3,-90);
-
-            sleep(500);
-
-            close();
-
-            liftup(10,.7);
-
-            gyroTurn(TURN_SPEED, 10);
-
-            liftup(3,.7);
-
-            gyroDrive(.3,-5.75,-5.75,-5.75,-5.75,10);
-
-            liftout(5,.9);
-
-            open();
-
-            liftout(-16,1);
-
-            liftup(-11, 1);
-
-            gyroDrive(.6,18,18,18,18,0);
-
-            close();
-
-            strafeToPosition(-10, .6);
-        }
-
-        else if(detector.boxCenter){
-
-            strafeToPosition(6, DRIVE_SPEED);
-
-            gyroTurn(TURN_SPEED, 15);
-
-            gyroDrive(.2, 9.7, 9.7, 9.7, 9.7, 15);
-
-            sleep(500);
-
-            Spinner.setPower(-.9);
-            sleep(3000);
-            Spinner.setPower(0);
-
-            gyroTurn(TURN_SPEED, -2);
-
-            strafeToPosition(24, DRIVE_SPEED);
-
-            liftup(6.05,.5);
-
-            gyroDrive(.3, -11.3, -11.3, -11.3, -11.3,0);
+            gyroDrive(.3, -13.5, -13.5, -13.5, -13.5,0);
 
             liftout(23,.9);
 
@@ -204,37 +135,56 @@ public class VistionRed extends LinearOpMode {
 
             open();
 
-            gyroDrive(DRIVE_SPEED,1.75,1.75,1.75,1.75,0);
-
-            liftup(-6,.5);
-
-            gyroTurn(TURN_SPEED, -80);
-
-            sleep(500);
-
-            close();
-
-            liftup(11.75, .9);
-
-            gyroTurn(TURN_SPEED, 6);
-
-            liftout(7, .9);
-
-            sleep(500);
-
-            gyroDrive(DRIVE_SPEED, -2.2,-2.2,-2.2,-2.2, 0);
-
-            open();
-
             liftout(-20,1);
 
-            liftup(-11, .8);
+            liftup(-10, .3);
 
             gyroDrive(.5,16,16,16,16,0);
 
             close();
 
-            strafeToPosition(-10, .6);
+            strafeToPosition(7, .6);
+
+            sleep(2000);
+        }
+
+        else if(detector.boxCenter){
+
+            strafeToPosition(-6, DRIVE_SPEED);
+
+            gyroTurn(TURN_SPEED, -15);
+
+            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, -15);
+
+            sleep(500);
+
+            Spinner.setPower(.9);
+            sleep(3000);
+            Spinner.setPower(0);
+
+            gyroTurn(TURN_SPEED, 2);
+
+            strafeToPosition(-21, DRIVE_SPEED);
+
+            liftup(6.05,.5);
+
+            gyroDrive(.3, -13, -13, -13, -13,0);
+
+            liftout(23,.9);
+
+            sleep(500);
+
+            open();
+
+            liftout(-21,1);
+
+            liftup(-5, .3);
+
+            gyroDrive(.5,16,16,16,16,0);
+
+            close();
+
+            strafeToPosition(5, .6);
 
             sleep(1000);
 
@@ -242,63 +192,45 @@ public class VistionRed extends LinearOpMode {
 
         else {
 
-            strafeToPosition(6, DRIVE_SPEED);
+            strafeToPosition(-6, DRIVE_SPEED);
 
-            gyroTurn(TURN_SPEED, 15);
+            gyroTurn(TURN_SPEED, -15);
 
-            gyroDrive(.2, 9.7, 9.7, 9.7, 9.7, 15);
+            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, -15);
 
             sleep(500);
 
-            Spinner.setPower(-.9);
+            Spinner.setPower(.9);
             sleep(3000);
             Spinner.setPower(0);
 
-            gyroTurn(TURN_SPEED, -2);
+            gyroTurn(TURN_SPEED, 2);
 
-            strafeToPosition(25, DRIVE_SPEED);
+            strafeToPosition(-24, DRIVE_SPEED);
 
-            liftup(11.75,.7);
+            gyroTurn(TURN_SPEED,8);
 
-            gyroDrive(.3, -11.9, -11.9, -11.9, -11.9,0);
+            liftup(2.3,.3);
 
-            liftout(24,.9);
+            gyroDrive(.2, -13, -13, -13, -13,8);
+
+            liftout(20,.9);
 
             sleep(500);
-
-            open();
-
-            gyroDrive(.3, 1.6, 1.6, 1.6, 1.6,0);
-
-            liftup(-11.5, .8);
-
-            gyroTurn(TURN_SPEED, -53);
-
-            sleep(1500);
-
-            close();
-
-            gyroDrive(.2, 2,2,2,2,-53);
-
-            liftup(11.5, 1);
-
-            gyroTurn(TURN_SPEED, 5);
-
-            gyroDrive(.2, -3,-3,-3,-3,0);
 
             open();
 
             sleep(1000);
 
-            liftout(-16,1);
+            liftout(-10,.8);
 
-            liftup(-11, 1);
+            liftup(-2, .2);
 
-            gyroDrive(.4,16,16,16,16,0);
+            gyroDrive(.4,18,18,18,18,8);
 
             close();
 
-            strafeToPosition(-10, .5);
+            strafeToPosition(8, .4);
         }
     }
 
@@ -323,7 +255,7 @@ public class VistionRed extends LinearOpMode {
     public void open(){
         while(InandOut.isBusy() || UpandDown.isBusy()){
         }
-        grabber.setPosition(.8);
+        grabber.setPosition(.75);
     }
 
     public void close(){

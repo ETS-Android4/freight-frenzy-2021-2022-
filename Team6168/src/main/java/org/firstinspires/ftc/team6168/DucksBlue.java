@@ -19,8 +19,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="VistionBlue")
-public class VistionBlue extends LinearOpMode {
+@Autonomous(name="DucksBlue")
+public class DucksBlue extends LinearOpMode {
     //
     DcMotor frontleft;
     DcMotor frontright;
@@ -106,7 +106,7 @@ public class VistionBlue extends LinearOpMode {
         telemetry.addData("leftduckdetected",detector.left_avg);
         telemetry.update();
 
-        if(detector.boxLeft){
+        if(detector.boxRight){
 
             strafeToPosition(-6, DRIVE_SPEED);
 

@@ -18,8 +18,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="WarehouseBlue")
-public class WarehouseBlue extends LinearOpMode {
+@Autonomous(name="CarouselRedVision")
+public class CarouselRedVision extends LinearOpMode {
     //
     DcMotor frontleft;
     DcMotor frontright;
@@ -86,10 +86,11 @@ public class WarehouseBlue extends LinearOpMode {
         RedDuckDetector detector = new RedDuckDetector(this);
 
 
+
         telemetry.addLine("Start Gyro");
         telemetry.update();
         gyro.calibrate();
-        while (gyro.isCalibrating()) ;
+        while(gyro.isCalibrating());
         telemetry.addLine("Gyro Calibrated");
         telemetry.addData("Angle: ", gyro.getIntegratedZValue());
         telemetry.update();
@@ -98,113 +99,138 @@ public class WarehouseBlue extends LinearOpMode {
 
         waitForStart();
 
-        telemetry.addData("Duck Left", detector.boxLeft);
-        telemetry.addData("Duck Center", detector.boxCenter);
-        telemetry.addData("Duck Right", detector.boxRight);
+        telemetry.addData("Duck Left",detector.boxLeft);
+        telemetry.addData("Duck Center",detector.boxCenter);
+        telemetry.addData("Duck Right",detector.boxRight);
 
-        telemetry.addData("leftduckdetected", detector.left_avg);
-        telemetry.addData("leftduckdetected", detector.left_avg);
+        telemetry.addData("leftduckdetected",detector.left_avg);
+        telemetry.addData("leftduckdetected",detector.left_avg);
         telemetry.update();
 
-        if (detector.boxLeft){
+        if(detector.boxLeft){
 
-            gyroDrive(DRIVE_SPEED, -12, -12, -12, -12, 0);
+            strafeToPosition(6, DRIVE_SPEED);
 
-            strafeToPosition(14, DRIVE_SPEED);
+            gyroTurn(TURN_SPEED, 15);
 
-            liftup(11, .9);
-
-            gyroTurn(TURN_SPEED, 90);
-
-            gyroDrive(DRIVE_SPEED, -1, -1,-1,-1,90);
-
-            liftout(23, 1);
-
-            open();
+            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, 15);
 
             sleep(500);
 
-            close();
+            Spinner.setPower(-.9);
+            sleep(3000);
+            Spinner.setPower(0);
 
-            gyroDrive(DRIVE_SPEED,10.5,10.5,10.5,10.5,90);
+            gyroTurn(TURN_SPEED, -2);
 
-            liftout(-20, 1);
+            strafeToPosition(10, DRIVE_SPEED);
 
-            liftup(-10, .9);
-
-            gyroTurn(TURN_SPEED, -180);
-
-            strafeToPosition(2.5,DRIVE_SPEED);
-
-            gyroDrive(DRIVE_SPEED, -25, -25, -25, -25,-180);
-
-        }
-
-
-        else if(detector.boxCenter){
-
-            gyroDrive(DRIVE_SPEED, -12, -12, -12, -12, 0);
+            gyroDrive(DRIVE_SPEED,1.5, 1.5,1.5,1.5,0);
 
             strafeToPosition(14, DRIVE_SPEED);
 
-            liftup(6.1, .9);
+            gyroTurn(TURN_SPEED,10);
 
-            gyroTurn(TURN_SPEED, 90);
+            liftup(2.3,.3);
 
-            gyroDrive(DRIVE_SPEED, -1, -1,-1,-1,90);
+            gyroDrive(.2, -13.5, -13.5, -13.5, -13.5,10);
 
-            liftout(23, 1);
+            liftout(15,.9);
+
+            sleep(500);
 
             open();
 
-            sleep(1000);
+            liftout(-13,1);
+
+            liftup(-2, .2);
+
+            gyroDrive(.4,18,18,18,18,0);
 
             close();
 
-            gyroDrive(DRIVE_SPEED,10.5,10.5,10.5,10.5,90);
+            strafeToPosition(-12, .4);
+        }
 
-            liftout(-20, 1);
+        else if(detector.boxCenter){
 
-            liftup(-5.5, .9);
+            strafeToPosition(6, DRIVE_SPEED);
 
-            gyroTurn(TURN_SPEED, -180);
+            gyroTurn(TURN_SPEED, 15);
 
-            strafeToPosition(2.5,DRIVE_SPEED);
+            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, 15);
 
-            gyroDrive(DRIVE_SPEED, -25, -25, -25, -25,-180);
+            sleep(500);
 
+            Spinner.setPower(-.9);
+            sleep(3000);
+            Spinner.setPower(0);
+
+            gyroTurn(TURN_SPEED, -2);
+
+            strafeToPosition(25, DRIVE_SPEED);
+
+            liftup(6.05,.5);
+
+            gyroDrive(.3, -11.3, -11.3, -11.3, -11.3,0);
+
+            liftout(23,.9);
+
+            sleep(500);
+
+            open();
+
+            liftout(-20,1);
+
+            liftup(-11, .3);
+
+            gyroDrive(.5,16,16,16,16,0);
+
+            close();
+
+            strafeToPosition(-10, .6);
 
         }
 
         else {
 
-            gyroDrive(DRIVE_SPEED, -12, -12, -12, -12, 0);
+            strafeToPosition(6, DRIVE_SPEED);
 
-            strafeToPosition(14, DRIVE_SPEED);
+            gyroTurn(TURN_SPEED, 15);
 
-            liftup(2.1, .9);
+            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, 15);
 
-            gyroTurn(TURN_SPEED, 105);
+            sleep(500);
 
-            gyroDrive(DRIVE_SPEED, -.7, -.7,-.7,-.7,105);
+            Spinner.setPower(-.9);
+            sleep(3000);
+            Spinner.setPower(0);
 
-            liftout(23, 1);
+            gyroTurn(TURN_SPEED, -2);
+
+            strafeToPosition(25, DRIVE_SPEED);
+
+            liftup(11,.5);
+
+            gyroDrive(.3, -12, -12, -12, -12,0);
+
+            liftout(23,.9);
+
+            sleep(500);
 
             open();
 
-            gyroDrive(.3,10.5,10.5,10.5,10.5,90);
+            liftout(-20,1);
+
+            liftup(-10, .4);
+
+            gyroDrive(.5,16,16,16,16,0);
 
             close();
 
-            liftout(-20, 1);
+            strafeToPosition(-10, .6);
 
-            liftup(-2, .9);
-
-            gyroTurn(TURN_SPEED, -180);
-
-            strafeToPosition(2.7,DRIVE_SPEED);
-
-            gyroDrive(DRIVE_SPEED, -25, -25, -25, -25,-180);
+            sleep(3000);
         }
     }
 
@@ -229,7 +255,7 @@ public class WarehouseBlue extends LinearOpMode {
     public void open(){
         while(InandOut.isBusy() || UpandDown.isBusy()){
         }
-        grabber.setPosition(.75);
+        grabber.setPosition(.8);
     }
 
     public void close(){

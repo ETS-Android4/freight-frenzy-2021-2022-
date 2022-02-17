@@ -6,34 +6,27 @@ import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="CarouselBlue")
-public class CarouselBlue extends LinearOpMode {
+@Autonomous(name="AutoRedAllianceWarehouse")
+public class AutoRedAllianceWarehouse extends LinearOpMode {
     //
     DcMotor frontleft;
     DcMotor frontright;
     DcMotor backleft;
     DcMotor backright;
     DcMotor Spinner;
-    DcMotor InandOut;
-    DcMotorEx UpandDown;
-
-    Servo grabber;
 
     ModernRoboticsI2cGyro gyro;
-
-
     //28 * 20 / (2ppi * 4.125)
     Double width = 16.0; //inches
     Integer cpr = 28; //counts per rotation
@@ -48,44 +41,30 @@ public class CarouselBlue extends LinearOpMode {
     static final double P_TURN_COEFF = 0.1;     // Larger is more responsive, but also less stable
     static final double P_DRIVE_COEFF = 0.07;     // Larger is more responsive, but also less stable
 
-    double DRIVE_SPEED = 0.4;
-    double TURN_SPEED = 0.4;
-
+    double DRIVE_SPEED = 0.2;
+    double TURN_SPEED = 0.2;
+    //
     Double conversion = cpi * bias;
     Boolean exit = false;
-
+    //
     BNO055IMU imu;
     Orientation angles;
     Acceleration gravity;
-
-    public void runOpMode() throws InterruptedException {
-
+    //
+    public void runOpMode(){
+        //
         initGyro();
-
+        //
         frontleft = hardwareMap.dcMotor.get("Frontleft");
         frontright = hardwareMap.dcMotor.get("Frontright");
         backleft = hardwareMap.dcMotor.get("Backleft");
         backright = hardwareMap.dcMotor.get("Backright");
-        InandOut = hardwareMap.get(DcMotor.class, "InandOut");
-        UpandDown = hardwareMap.get(DcMotorEx.class, "UpandDown");
         DcMotor[] motors = {frontleft, frontright, backleft, backright};
         Spinner = hardwareMap.dcMotor.get("Car");
         gyro = hardwareMap.get(ModernRoboticsI2cGyro.class, "Gyro");
-        grabber = hardwareMap.get(Servo.class, "Grabber");
 
         frontright.setDirection(DcMotorSimple.Direction.REVERSE);
         backright.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        InandOut.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        UpandDown.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-
-        InandOut.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        UpandDown.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        BlueDuckDetector detector = new BlueDuckDetector(this);
-
-
 
         telemetry.addLine("Start Gyro");
         telemetry.update();
@@ -94,184 +73,24 @@ public class CarouselBlue extends LinearOpMode {
         telemetry.addLine("Gyro Calibrated");
         telemetry.addData("Angle: ", gyro.getIntegratedZValue());
         telemetry.update();
-
-        grabber.setPosition(1);
-
         waitForStart();
 
-        telemetry.addData("Duck Left",detector.boxLeft);
-        telemetry.addData("Duck Center",detector.boxCenter);
-        telemetry.addData("Duck Right",detector.boxRight);
+        gyroDrive(DRIVE_SPEED, 20, 20, 20, 20, 0);
 
-        telemetry.addData("leftduckdetected",detector.left_avg);
-        telemetry.addData("leftduckdetected",detector.left_avg);
-        telemetry.update();
 
-        if(detector.boxLeft){
-
-            strafeToPosition(-6, DRIVE_SPEED);
-
-            gyroTurn(TURN_SPEED, -15);
-
-            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, -15);
-
-            sleep(500);
-
-            Spinner.setPower(.9);
-            sleep(3000);
-            Spinner.setPower(0);
-
-            gyroTurn(TURN_SPEED, 2);
-
-            strafeToPosition(-21, DRIVE_SPEED);
-
-            liftup(11,.5);
-
-            gyroDrive(.3, -13.5, -13.5, -13.5, -13.5,0);
-
-            liftout(23,.9);
-
-            sleep(500);
-
-            open();
-
-            liftout(-20,1);
-
-            liftup(-10, .3);
-
-            gyroDrive(.5,16,16,16,16,0);
-
-            close();
-
-            strafeToPosition(7, .6);
-
-            sleep(2000);
-        }
-
-        else if(detector.boxCenter){
-
-            strafeToPosition(-6, DRIVE_SPEED);
-
-            gyroTurn(TURN_SPEED, -15);
-
-            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, -15);
-
-            sleep(500);
-
-            Spinner.setPower(.9);
-            sleep(3000);
-            Spinner.setPower(0);
-
-            gyroTurn(TURN_SPEED, 2);
-
-            strafeToPosition(-21, DRIVE_SPEED);
-
-            liftup(6.05,.5);
-
-            gyroDrive(.3, -13, -13, -13, -13,0);
-
-            liftout(23,.9);
-
-            sleep(500);
-
-            open();
-
-            liftout(-21,1);
-
-            liftup(-5, .3);
-
-            gyroDrive(.5,16,16,16,16,0);
-
-            close();
-
-            strafeToPosition(5, .6);
-
-            sleep(1000);
-
-        }
-
-        else {
-
-            strafeToPosition(-6, DRIVE_SPEED);
-
-            gyroTurn(TURN_SPEED, -15);
-
-            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, -15);
-
-            sleep(500);
-
-            Spinner.setPower(.9);
-            sleep(3000);
-            Spinner.setPower(0);
-
-            gyroTurn(TURN_SPEED, 2);
-
-            strafeToPosition(-24, DRIVE_SPEED);
-
-            gyroTurn(TURN_SPEED,8);
-
-            liftup(2.3,.3);
-
-            gyroDrive(.2, -13, -13, -13, -13,8);
-
-            liftout(20,.9);
-
-            sleep(500);
-
-            open();
-
-            sleep(1000);
-
-            liftout(-10,.8);
-
-            liftup(-2, .2);
-
-            gyroDrive(.4,18,18,18,18,8);
-
-            close();
-
-            strafeToPosition(8, .4);
-        }
     }
 
-
-
-    public void liftup(double inches, double speed) {
-        int move =  -(int)(Math.round(inches*conversion));
-
-        UpandDown.setTargetPosition(UpandDown.getCurrentPosition() + move);
-        UpandDown.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        UpandDown.setPower(speed);
-    }
-
-    public void liftout(double inches, double speed) {
-        int move =  (int)(Math.round(inches*conversion));
-
-        InandOut.setTargetPosition(InandOut.getCurrentPosition() + move);
-        InandOut.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        InandOut.setPower(speed);
-    }
-
-    public void open(){
-        while(InandOut.isBusy() || UpandDown.isBusy()){
-        }
-        grabber.setPosition(.75);
-    }
-
-    public void close(){
-        grabber.setPosition(1);
-    }
 
     public void turnWithGyro(double degrees, double speedDirection){
         //<editor-fold desc="Initialize">
         angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         double yaw = -angles.firstAngle;//make this negative
-//        telemetry.addData("Speed Direction", speedDirection);
-//        telemetry.addData("Yaw", yaw);
-//        telemetry.update();
-//        //
-//        telemetry.addData("stuff", speedDirection);
-//        telemetry.update();
+        telemetry.addData("Speed Direction", speedDirection);
+        telemetry.addData("Yaw", yaw);
+        telemetry.update();
+        //
+        telemetry.addData("stuff", speedDirection);
+        telemetry.update();
         //
         double first;
         double second;
@@ -311,10 +130,10 @@ public class CarouselBlue extends LinearOpMode {
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 gravity = imu.getGravity();
                 yaw = -angles.firstAngle;
-//                telemetry.addData("Position", yaw);
-//                telemetry.addData("first before", first);
-//                telemetry.addData("first after", convertify(first));
-                //telemetry.update();
+                telemetry.addData("Position", yaw);
+                telemetry.addData("first before", first);
+                telemetry.addData("first after", convertify(first));
+                telemetry.update();
             }
         }else{
             //
@@ -322,10 +141,10 @@ public class CarouselBlue extends LinearOpMode {
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 gravity = imu.getGravity();
                 yaw = -angles.firstAngle;
-//                telemetry.addData("Position", yaw);
-//                telemetry.addData("first before", first);
-//                telemetry.addData("first after", convertify(first));
-                //telemetry.update();
+                telemetry.addData("Position", yaw);
+                telemetry.addData("first before", first);
+                telemetry.addData("first after", convertify(first));
+                telemetry.update();
             }
         }
         //
@@ -339,19 +158,19 @@ public class CarouselBlue extends LinearOpMode {
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 gravity = imu.getGravity();
                 yaw = -angles.firstAngle;
-//                telemetry.addData("Position", yaw);
-//                telemetry.addData("second before", second);
-//                telemetry.addData("second after", convertify(second));
-                //telemetry.update();
+                telemetry.addData("Position", yaw);
+                telemetry.addData("second before", second);
+                telemetry.addData("second after", convertify(second));
+                telemetry.update();
             }
             while (!((seconda < yaw && yaw < 180) || (-180 < yaw && yaw < secondb)) && opModeIsActive()) {//within range?
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 gravity = imu.getGravity();
                 yaw = -angles.firstAngle;
-                //telemetry.addData("Position", yaw);
-                //telemetry.addData("second before", second);
-                //telemetry.addData("second after", convertify(second));
-                //telemetry.update();
+                telemetry.addData("Position", yaw);
+                telemetry.addData("second before", second);
+                telemetry.addData("second after", convertify(second));
+                telemetry.update();
             }
             frontleft.setPower(0);
             frontright.setPower(0);
@@ -369,7 +188,11 @@ public class CarouselBlue extends LinearOpMode {
         backleft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backright.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
-
+    //
+    /*
+    This function uses the encoders to strafe left or right.
+    Negative input for inches results in left strafing.
+     */
     public void strafeToPosition(double inches, double speed){
         //
         int move = (int)(Math.round(inches * cpi * meccyBias));
@@ -396,14 +219,25 @@ public class CarouselBlue extends LinearOpMode {
         backleft.setPower(0);
         return;
     }
-
+    //
+    /*
+    A tradition within the Thunder Pengwins code, we always start programs with waitForStartify,
+    our way of adding personality to our programs.
+     */
+    public void waitForStartify(){
+        waitForStart();
+    }
+    //
+    /*
+    These functions are used in the turnWithGyro function to ensure inputs
+    are interpreted properly.
+     */
     public double devertify(double degrees){
         if (degrees < 0){
             degrees = degrees + 360;
         }
         return degrees;
     }
-
     public double convertify(double degrees){
         if (degrees > 179){
             degrees = -(360 - degrees);
@@ -414,7 +248,11 @@ public class CarouselBlue extends LinearOpMode {
         }
         return degrees;
     }
-
+    //
+    /*
+    This function is called at the beginning of the program to activate
+    the IMU Integrated Gyro.
+     */
     public void initGyro(){
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
@@ -427,7 +265,11 @@ public class CarouselBlue extends LinearOpMode {
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
     }
-
+    //
+    /*
+    This function is used in the turnWithGyro function to set the
+    encoder mode and turn.
+     */
     public void turnWithEncoder(double input){
         frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -527,11 +369,11 @@ public class CarouselBlue extends LinearOpMode {
                 backright.setPower(backRightSpeed);
 
                 // Display drive status for the driver.
-//                telemetry.addData("Err/St", "%5.1f/%5.1f", error, steer);
-//                telemetry.addData("Target", "%7d:%7d", newBackLeftTarget, newBackRightTarget, newFrontLeftTarget, newFrontRightTarget);
-//                telemetry.addData("Actual", "%7d:%7d", backleft.getCurrentPosition(), backright.getCurrentPosition(), frontleft.getCurrentPosition(), frontright.getCurrentPosition());
-//                telemetry.addData("Speed", "%5.2f:%5.2f", backLeftSpeed, backRightSpeed, frontLeftSpeed, frontRightSpeed);
-//                telemetry.update();
+                telemetry.addData("Err/St", "%5.1f/%5.1f", error, steer);
+                telemetry.addData("Target", "%7d:%7d", newBackLeftTarget, newBackRightTarget, newFrontLeftTarget, newFrontRightTarget);
+                telemetry.addData("Actual", "%7d:%7d", backleft.getCurrentPosition(), backright.getCurrentPosition(), frontleft.getCurrentPosition(), frontright.getCurrentPosition());
+                telemetry.addData("Speed", "%5.2f:%5.2f", backLeftSpeed, backRightSpeed, frontLeftSpeed, frontRightSpeed);
+                telemetry.update();
 
                 ErrorAmount = ((Math.abs(((newBackLeftTarget) - (backleft.getCurrentPosition())))
                         + (Math.abs(((newFrontLeftTarget) - (frontleft.getCurrentPosition()))))
@@ -555,7 +397,6 @@ public class CarouselBlue extends LinearOpMode {
             backright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
-
     public void gyroTurn ( double speed, double angle){
         frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -571,6 +412,18 @@ public class CarouselBlue extends LinearOpMode {
         frontright.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backright.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
+
+    /**
+     *  Method to obtain & hold a heading for a finite amount of time
+     *  Move will stop once the requested time has elapsed
+     *
+     * @param speed      Desired speed of turn.
+     * @param angle      Absolute Angle (in Degrees) relative to last gyro reset.
+     *                   0 = fwd. +ve is CCW from fwd. -ve is CW from forward.
+     *                   If a relative angle is required, add/subtract from current heading.
+     * @param holdTime   Length of time (in seconds) to hold the specified heading.
+     */
+
 
     public void gyroHold ( double speed, double angle, double holdTime){
 
@@ -593,6 +446,17 @@ public class CarouselBlue extends LinearOpMode {
         frontright.setPower(0);
     }
 
+
+    /**
+     * Perform one cycle of closed loop heading control.
+     *
+     * @param speed     Desired speed of turn.
+     * @param angle     Absolute Angle (in Degrees) relative to last gyro reset.
+     *                  0 = fwd. +ve is CCW from fwd. -ve is CW from forward.
+     *                  If a relative angle is required, add/subtract from current heading.
+     * @param PCoeff    Proportional Gain coefficient
+     * @return
+     */
     boolean onHeading ( double speed, double angle, double PCoeff){
         double error;
         double steer;
@@ -621,13 +485,19 @@ public class CarouselBlue extends LinearOpMode {
         frontright.setPower(rightSpeed);
 
         // Display it for the driver.
-//        telemetry.addData("Target", "%5.2f", angle);
-//        telemetry.addData("Err/St", "%5.2f/%5.2f", error, steer);
-//        telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);
+        telemetry.addData("Target", "%5.2f", angle);
+        telemetry.addData("Err/St", "%5.2f/%5.2f", error, steer);
+        telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);
 
         return onTarget;
     }
 
+    /**
+     * getError determines the error between the target angle and the robot's current heading
+     * @param   targetAngle  Desired angle (relative to global reference established at last Gyro Reset).
+     * @return error angle: Degrees in the range +/- 180. Centered on the robot's frame of reference
+     *          +ve error means the robot should turn LEFT (CCW) to reduce error.
+     */
     public double getError ( double targetAngle){
 
         double robotError;
@@ -639,6 +509,12 @@ public class CarouselBlue extends LinearOpMode {
         return -robotError;
     }
 
+    /**
+     * returns desired steering force.  +/- 1 range.  +ve = steer left
+     * @param error   Error angle in robot relative degrees
+     * @param PCoeff  Proportional Gain Coefficient
+     * @return
+     */
     public double getSteer ( double error, double PCoeff){
         return Range.clip(error * PCoeff, -DRIVE_SPEED, 1);
     }
