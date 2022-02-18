@@ -103,8 +103,6 @@ public class teleOP extends OpMode {
     @Override
     public void loop() {
 
-        telemetry.addData("Lift Encoders: ", UpandDown.getCurrentPosition());
-        telemetry.update();
         //Slow Mode Code for a and b keys
         if (gamepad1.a == true) {
             speedMode = .4;
@@ -213,6 +211,15 @@ public class teleOP extends OpMode {
             UpandDown.setPower(-1);
         }else{
             UpandDown.setPower(0);
+        }
+
+        //Level 3= -700
+        //Level 2= -400
+        //Level 1= -150
+
+        telemetry.addData("Lift Encoders: ", UpandDown.getCurrentPosition());
+        telemetry.update();
+
         }
     }
 }
