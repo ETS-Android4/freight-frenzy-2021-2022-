@@ -107,7 +107,7 @@ public class DucksRed extends LinearOpMode {
         telemetry.addData("leftduckdetected",detector.left_avg);
         telemetry.update();
 
-        if(detector.boxRight){
+        if(detector.boxLeft){
 
             strafeToPosition(6, DRIVE_SPEED);
 
