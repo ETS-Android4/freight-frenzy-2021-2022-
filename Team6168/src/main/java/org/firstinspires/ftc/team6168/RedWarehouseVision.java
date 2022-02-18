@@ -202,7 +202,7 @@ public class RedWarehouseVision extends LinearOpMode {
 
             gyroTurn(TURN_SPEED, 187);
 
-            strafeToPosition(2.7,DRIVE_SPEED);
+            strafeToPosition(-2.7,DRIVE_SPEED);
 
             gyroDrive(DRIVE_SPEED, -28, -28, -28, -28,187);
         }

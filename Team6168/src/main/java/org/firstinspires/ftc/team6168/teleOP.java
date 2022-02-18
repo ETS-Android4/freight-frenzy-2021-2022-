@@ -220,6 +220,6 @@ public class teleOP extends OpMode {
         telemetry.addData("Lift Encoders: ", UpandDown.getCurrentPosition());
         telemetry.update();
 
-        }
+
     }
 }
