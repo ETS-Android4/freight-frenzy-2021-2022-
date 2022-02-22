@@ -30,6 +30,11 @@ public class teleOP extends OpMode {
 
     public double speedMode = 1;
 
+    public boolean xIsHeld = false;
+    public boolean bIsHeld = false;
+    public double  DUCK_REDUCTION = (1.0 / 0.53);
+
+
 
     @Override
     public void init() {
@@ -176,7 +181,7 @@ public class teleOP extends OpMode {
         //base().getTelemetry().addData("Setting rightBack power to " , rightBackPower);
 
 
-        //Carosel Spinner Code
+        //Old Carosel Spinner Code
         if (gamepad2.left_bumper) {
             SpinnerMotor.setPower(1);
         }else if (gamepad2.right_bumper) {
@@ -184,6 +189,20 @@ public class teleOP extends OpMode {
         }else {
             SpinnerMotor.setPower(0);
         }
+
+
+        //New Carousel Spinner Code
+        double duckSpin = gamepad2.left_stick_x / DUCK_REDUCTION; //Speed = 0.53
+        if (duckSpin > 0.1) {
+            SpinnerMotor.setPower(duckSpin);
+        }
+        else if (duckSpin < -0.1){
+            SpinnerMotor.setPower(-duckSpin);
+        }
+        else {
+            SpinnerMotor.setPower(0);
+        }
+
 
 
         //Grabber Code
@@ -195,6 +214,7 @@ public class teleOP extends OpMode {
             //Grabber.setPosition(.5);  //If uncommented, this will make it so you need to hold down the grabber button to keep the grabber closed
         }
 
+        
         //InandOut Code
         if (gamepad2.right_stick_x >= 0.3) {
             InandOut.setPower(1);
@@ -220,6 +240,34 @@ public class teleOP extends OpMode {
         telemetry.addData("Lift Encoders: ", UpandDown.getCurrentPosition());
         telemetry.update();
 
+        //Blue Carousel Button
+        if (gamepad2.x  && !xIsHeld){
+            xIsHeld = true;
+            SpinnerMotor.setPower(.7);
+            double target = this.getRuntime() + 1.5;
+            while(target > this.getRuntime());
+            SpinnerMotor.setPower(1);
+            double target2 = this.getRuntime() + .7;
+            while(target2 > this.getRuntime());
+        }
+        if(!gamepad2.x){
+            xIsHeld = false;
+        }
+
+
+        //Red Carousel Button
+        if (gamepad2.b  && !bIsHeld){
+            bIsHeld = true;
+            SpinnerMotor.setPower(-.7);
+            double target = this.getRuntime() + 1.5;
+            while(target > this.getRuntime());
+            SpinnerMotor.setPower(-1);
+            double target2 = this.getRuntime() + .7;
+            while(target2 > this.getRuntime());
+        }
+        if(!gamepad2.b){
+            bIsHeld = false;
+        }
 
     }
 }
