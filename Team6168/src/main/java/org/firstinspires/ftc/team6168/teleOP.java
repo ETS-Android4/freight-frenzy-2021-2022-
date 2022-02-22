@@ -214,7 +214,7 @@ public class teleOP extends OpMode {
             //Grabber.setPosition(.5);  //If uncommented, this will make it so you need to hold down the grabber button to keep the grabber closed
         }
 
-        
+
         //InandOut Code
         if (gamepad2.right_stick_x >= 0.3) {
             InandOut.setPower(1);
