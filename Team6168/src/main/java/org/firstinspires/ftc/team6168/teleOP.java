@@ -17,7 +17,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class teleOP extends OpMode {
 
 
-    private ElapsedTime runtime = new ElapsedTime();
     public DcMotor backleft;
     public DcMotor frontleft;
     public DcMotor backright;
@@ -34,7 +33,6 @@ public class teleOP extends OpMode {
     public boolean bIsHeld = false;
     public boolean dpadLeftIsHeld = false;
     public boolean dpadRightIsHeld = false;
-    public double  DUCK_REDUCTION = (1.0 / 0.53);
 
 
 
@@ -265,11 +263,11 @@ public class teleOP extends OpMode {
         //Blue Carousel Button
         if (gamepad2.x  && !xIsHeld){
             xIsHeld = true;
-            SpinnerMotor.setPower(.55);
+            SpinnerMotor.setPower(-.55);
             double target = this.getRuntime() + 1;
             while(target > this.getRuntime());
-            SpinnerMotor.setPower(.8);
-            double target2 = this.getRuntime() + .3;
+            SpinnerMotor.setPower(-1);
+            double target2 = this.getRuntime() + .1;
             while(target2 > this.getRuntime());
         }
         if(!gamepad2.x){
@@ -283,11 +281,11 @@ public class teleOP extends OpMode {
         //Red Carousel Button
         if (gamepad2.b  && !bIsHeld){
             bIsHeld = true;
-            SpinnerMotor.setPower(-.55);
+            SpinnerMotor.setPower(.55);
             double target = this.getRuntime() + 1;
             while(target > this.getRuntime());
-            SpinnerMotor.setPower(-.8);
-            double target2 = this.getRuntime() + .3;
+            SpinnerMotor.setPower(1);
+            double target2 = this.getRuntime() + .1;
             while(target2 > this.getRuntime());
         }
         if(!gamepad2.b){
