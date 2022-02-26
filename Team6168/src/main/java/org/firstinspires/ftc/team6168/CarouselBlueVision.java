@@ -117,13 +117,13 @@ public class CarouselBlueVision extends LinearOpMode {
 
             sleep(500);
 
-            Spinner.setPower(.9);
-            sleep(3000);
+            Spinner.setPower(-.6);
+            sleep(2500);
             Spinner.setPower(0);
 
             gyroTurn(TURN_SPEED, 2);
 
-            strafeToPosition(-21, DRIVE_SPEED);
+            strafeToPosition(-22, DRIVE_SPEED);
 
             liftup(11,.5);
 
@@ -158,13 +158,13 @@ public class CarouselBlueVision extends LinearOpMode {
 
             sleep(500);
 
-            Spinner.setPower(.9);
-            sleep(3000);
+            Spinner.setPower(-.6);
+            sleep(2500);
             Spinner.setPower(0);
 
             gyroTurn(TURN_SPEED, 2);
 
-            strafeToPosition(-21, DRIVE_SPEED);
+            strafeToPosition(-22, DRIVE_SPEED);
 
             liftup(6.05,.5);
 
@@ -200,8 +200,8 @@ public class CarouselBlueVision extends LinearOpMode {
 
             sleep(500);
 
-            Spinner.setPower(.9);
-            sleep(3000);
+            Spinner.setPower(-.6);
+            sleep(2500);
             Spinner.setPower(0);
 
             gyroTurn(TURN_SPEED, 2);

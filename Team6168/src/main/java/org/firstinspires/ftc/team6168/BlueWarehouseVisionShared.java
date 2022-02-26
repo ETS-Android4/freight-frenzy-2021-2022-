@@ -122,11 +122,11 @@ public class BlueWarehouseVisionShared extends LinearOpMode {
 
             open();
 
-            sleep(500);
-
-            close();
+            sleep(200);
 
             gyroDrive(.6,10.5,10.5,10.5,10.5,90);
+
+            close();
 
             liftout(-19, 1);
 
@@ -140,9 +140,9 @@ public class BlueWarehouseVisionShared extends LinearOpMode {
 
             strafeToPosition(-16, .7);
 
-            gyroTurn(TURN_SPEED, 90);
+            gyroTurn(TURN_SPEED, 270);
 
-            strafeToPosition(15, .7);
+            strafeToPosition(-15, .7);
 
         }
 
@@ -159,7 +159,7 @@ public class BlueWarehouseVisionShared extends LinearOpMode {
 
             gyroDrive(DRIVE_SPEED, -1, -1,-1,-1,90);
 
-            liftout(23, 1);
+            liftout(20, 1);
 
             open();
 
@@ -169,7 +169,7 @@ public class BlueWarehouseVisionShared extends LinearOpMode {
 
             close();
 
-            liftout(-13, 1);
+            liftout(-10, 1);
 
             liftup(-5.5, .9);
 
@@ -181,9 +181,9 @@ public class BlueWarehouseVisionShared extends LinearOpMode {
 
             strafeToPosition(-16, .7);
 
-            gyroTurn(TURN_SPEED, 90);
+            gyroTurn(TURN_SPEED, 270);
 
-            strafeToPosition(15, .7);
+            strafeToPosition(-15, .7);
 
         }
 
@@ -219,9 +219,9 @@ public class BlueWarehouseVisionShared extends LinearOpMode {
 
             strafeToPosition(-16, .7);
 
-            gyroTurn(TURN_SPEED, 90);
+            gyroTurn(TURN_SPEED, 270);
 
-            strafeToPosition(17, .7);
+            strafeToPosition(-17, .7);
         }
     }
 
