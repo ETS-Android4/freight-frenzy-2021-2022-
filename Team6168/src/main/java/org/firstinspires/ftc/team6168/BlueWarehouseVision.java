@@ -147,13 +147,13 @@ public class BlueWarehouseVision extends LinearOpMode {
 
             strafeToPosition(14, DRIVE_SPEED);
 
-            liftup(6.1, .9);
+            liftup(6.05, .9);
 
             gyroTurn(TURN_SPEED, 90);
 
             gyroDrive(DRIVE_SPEED, -1, -1,-1,-1,90);
 
-            liftout(23, 1);
+            liftout(19, 1);
 
             open();
 
@@ -163,7 +163,7 @@ public class BlueWarehouseVision extends LinearOpMode {
 
             gyroDrive(DRIVE_SPEED,10.5,10.5,10.5,10.5,90);
 
-            liftout(-20, 1);
+            liftout(-16, 1);
 
             liftup(-5.5, .9);
 
