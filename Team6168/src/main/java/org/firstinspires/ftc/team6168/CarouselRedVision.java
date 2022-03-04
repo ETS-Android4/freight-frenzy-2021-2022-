@@ -113,11 +113,11 @@ public class CarouselRedVision extends LinearOpMode {
 
             gyroTurn(TURN_SPEED, 15);
 
-            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, 15);
+            gyroDrive(.2, 8.5, 8.5, 8.5, 8.5, 15);
 
             sleep(500);
 
-            Spinner.setPower(-.9);
+            Spinner.setPower(.4);
             sleep(3000);
             Spinner.setPower(0);
 
@@ -131,9 +131,9 @@ public class CarouselRedVision extends LinearOpMode {
 
             gyroTurn(TURN_SPEED,10);
 
-            liftup(2.3,.3);
+            liftup(2.4,.3);
 
-            gyroDrive(.2, -13.5, -13.5, -13.5, -13.5,10);
+            gyroDrive(.2, -13.2, -13.2, -13.2, -13.2,10);
 
             liftout(15,.9);
 
@@ -141,13 +141,15 @@ public class CarouselRedVision extends LinearOpMode {
 
             open();
 
-            liftout(-13,1);
+            liftout(-13,.7);
+
+            gyroDrive(.4,4,4,4,4,0);
 
             liftup(-2, .2);
 
-            gyroDrive(.4,18,18,18,18,0);
-
             close();
+
+            gyroDrive(.4,14,14,14,14,0);
 
             strafeToPosition(-12, .4);
         }
@@ -158,11 +160,11 @@ public class CarouselRedVision extends LinearOpMode {
 
             gyroTurn(TURN_SPEED, 15);
 
-            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, 15);
+            gyroDrive(.2, 8.75, 8.75, 8.75, 8.75, 15);
 
             sleep(500);
 
-            Spinner.setPower(-.9);
+            Spinner.setPower(.4);
             sleep(3000);
             Spinner.setPower(0);
 
@@ -174,21 +176,23 @@ public class CarouselRedVision extends LinearOpMode {
 
             gyroDrive(.3, -11.3, -11.3, -11.3, -11.3,0);
 
-            liftout(23,.9);
+            liftout(17,.9);
 
             sleep(500);
 
             open();
 
-            liftout(-20,1);
+            liftout(-13,1);
 
-            liftup(-11, .3);
+            gyroDrive(.4,17,17,17,17,0);
 
-            gyroDrive(.5,16,16,16,16,0);
+            liftup(-5, .3);
 
             close();
 
             strafeToPosition(-10, .6);
+
+            sleep(2000);
 
         }
 
@@ -198,19 +202,19 @@ public class CarouselRedVision extends LinearOpMode {
 
             gyroTurn(TURN_SPEED, 15);
 
-            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, 15);
+            gyroDrive(.2, 9.1, 9.1, 9.1, 9.1, 15);
 
             sleep(500);
 
-            Spinner.setPower(-.9);
+            Spinner.setPower(.4);
             sleep(3000);
             Spinner.setPower(0);
 
             gyroTurn(TURN_SPEED, -2);
 
-            strafeToPosition(25, DRIVE_SPEED);
+            strafeToPosition(26, DRIVE_SPEED);
 
-            liftup(11,.5);
+            liftup(10.82,.5);
 
             gyroDrive(.3, -12, -12, -12, -12,0);
 
@@ -222,13 +226,13 @@ public class CarouselRedVision extends LinearOpMode {
 
             liftout(-20,1);
 
-            liftup(-10, .4);
+            gyroDrive(.4,16,16,16,16,0);
 
-            gyroDrive(.5,16,16,16,16,0);
+            liftup(-10, .4);
 
             close();
 
-            strafeToPosition(-10, .6);
+            strafeToPosition(-10, .4);
 
             sleep(3000);
         }

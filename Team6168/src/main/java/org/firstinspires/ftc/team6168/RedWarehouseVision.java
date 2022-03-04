@@ -124,9 +124,9 @@ public class RedWarehouseVision extends LinearOpMode {
 
             sleep(500);
 
-            close();
-
             gyroDrive(DRIVE_SPEED,10.5,10.5,10.5,10.5,-90);
+
+            close();
 
             liftout(-20, 1);
 
@@ -147,7 +147,7 @@ public class RedWarehouseVision extends LinearOpMode {
 
             strafeToPosition(-14, DRIVE_SPEED);
 
-            liftup(6.1, .9);
+            liftup(6.2, .9);
 
             gyroTurn(TURN_SPEED, -90);
 
@@ -159,11 +159,11 @@ public class RedWarehouseVision extends LinearOpMode {
 
             sleep(1000);
 
-            close();
-
             gyroDrive(DRIVE_SPEED,10.5,10.5,10.5,10.5,-90);
 
-            liftout(-20, 1);
+            close();
+
+            liftout(-18, 1);
 
             liftup(-5.5, .9);
 
@@ -182,13 +182,13 @@ public class RedWarehouseVision extends LinearOpMode {
 
             strafeToPosition(-14, DRIVE_SPEED);
 
-            liftup(2.15, .9);
+            liftup(2.2, .9);
 
             gyroTurn(TURN_SPEED, -75);
 
             gyroDrive(DRIVE_SPEED, -.7, -.7,-.7,-.7,-75);
 
-            liftout(23, 1);
+            liftout(19, 1);
 
             open();
 
