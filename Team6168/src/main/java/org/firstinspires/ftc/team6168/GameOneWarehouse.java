@@ -18,8 +18,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="CarouselBlueVision")
-public class CarouselBlueVision extends LinearOpMode {
+@Autonomous(name="GameOneWarehouse")
+public class GameOneWarehouse extends LinearOpMode {
     //
     DcMotor frontleft;
     DcMotor frontright;
@@ -83,14 +83,13 @@ public class CarouselBlueVision extends LinearOpMode {
         InandOut.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         UpandDown.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        BlueDuckDetector detector = new BlueDuckDetector(this);
-
+        RedDuckDetector detector = new RedDuckDetector(this);
 
 
         telemetry.addLine("Start Gyro");
         telemetry.update();
         gyro.calibrate();
-        while(gyro.isCalibrating());
+        while (gyro.isCalibrating()) ;
         telemetry.addLine("Gyro Calibrated");
         telemetry.addData("Angle: ", gyro.getIntegratedZValue());
         telemetry.update();
@@ -99,138 +98,136 @@ public class CarouselBlueVision extends LinearOpMode {
 
         waitForStart();
 
-        telemetry.addData("Duck Left",detector.boxLeft);
-        telemetry.addData("Duck Center",detector.boxCenter);
-        telemetry.addData("Duck Right",detector.boxRight);
+        telemetry.addData("Duck Left", detector.boxLeft);
+        telemetry.addData("Duck Center", detector.boxCenter);
+        telemetry.addData("Duck Right", detector.boxRight);
 
-        telemetry.addData("leftduckdetected",detector.left_avg);
-        telemetry.addData("leftduckdetected",detector.left_avg);
+        telemetry.addData("leftduckdetected", detector.left_avg);
+        telemetry.addData("leftduckdetected", detector.left_avg);
         telemetry.update();
 
-        if(detector.boxRight){
+        if (detector.boxRight){
 
-            strafeToPosition(-6, DRIVE_SPEED);
+            sleep(7000);
 
-            gyroTurn(TURN_SPEED, -15);
+            gyroDrive(DRIVE_SPEED, -13, -13, -13, -13, 0);
 
-            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, -15);
+            strafeToPosition(14, DRIVE_SPEED);
 
-            sleep(500);
+            liftup(11, .9);
 
-            Spinner.setPower(-.4);
-            sleep(2500);
-            Spinner.setPower(0);
+            gyroTurn(TURN_SPEED, 90);
 
-            gyroTurn(TURN_SPEED, 2);
+            gyroDrive(DRIVE_SPEED, -1, -1,-1,-1,90);
 
-            strafeToPosition(-22, DRIVE_SPEED);
-
-            liftup(11,.5);
-
-            gyroDrive(.3, -13.5, -13.5, -13.5, -13.5,0);
-
-            liftout(23,.9);
-
-            sleep(500);
+            liftout(23, 1);
 
             open();
 
-            liftout(-20,1);
+            sleep(200);
 
-            liftup(-10, .3);
-
-            gyroDrive(.5,16,16,16,16,0);
+            gyroDrive(.6,10.5,10.5,10.5,10.5,90);
 
             close();
 
-            strafeToPosition(7, .6);
+            liftout(-19, 1);
 
-            sleep(2000);
+            liftup(-10, .9);
+
+            gyroTurn(TURN_SPEED, -180);
+
+            strafeToPosition(2.5,.6);
+
+            gyroDrive(.7, -24, -24, -24, -24,-180);
+
+            strafeToPosition(-16, .7);
+
+            gyroTurn(TURN_SPEED, 270);
+
+            strafeToPosition(-15, .7);
+
         }
+
 
         else if(detector.boxCenter){
 
-            strafeToPosition(-6, DRIVE_SPEED);
+            sleep(5000);
 
-            gyroTurn(TURN_SPEED, -15);
+            gyroDrive(DRIVE_SPEED, -13, -13, -13, -13, 0);
 
-            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, -15);
+            strafeToPosition(14, DRIVE_SPEED);
 
-            sleep(500);
+            liftup(6.1, .9);
 
-            Spinner.setPower(-.4);
-            sleep(2500);
-            Spinner.setPower(0);
+            gyroTurn(TURN_SPEED, 90);
 
-            gyroTurn(TURN_SPEED, 2);
+            gyroDrive(DRIVE_SPEED, -1, -1,-1,-1,90);
 
-            strafeToPosition(-22, DRIVE_SPEED);
-
-            liftup(6.1,.5);
-
-            gyroDrive(.3, -13, -13, -13, -13,0);
-
-            liftout(23,.9);
-
-            sleep(500);
+            liftout(20, 1);
 
             open();
 
-            liftout(-21,1);
+            sleep(1000);
 
-            gyroDrive(.5,16,16,16,16,0);
-
-            liftup(-5, .3);
+            gyroDrive(.6,10.5,10.5,10.5,10.5,90);
 
             close();
 
-            strafeToPosition(5, .6);
+            liftout(-10, 1);
 
-            sleep(1000);
+            liftup(-5.5, .9);
+
+            gyroTurn(TURN_SPEED, -180);
+
+            strafeToPosition(2.5,.6);
+
+            gyroDrive(.7, -24, -24, -24, -24,-180);
+
+            strafeToPosition(-16, .7);
+
+            gyroTurn(TURN_SPEED, 270);
+
+            strafeToPosition(-15, .7);
 
         }
 
         else {
 
-            strafeToPosition(-6, DRIVE_SPEED);
+            sleep(5000);
 
-            gyroTurn(TURN_SPEED, -15);
+            gyroDrive(DRIVE_SPEED, -13, -13, -13, -13, 0);
 
-            gyroDrive(.2, 9.6, 9.6, 9.6, 9.6, -15);
+            strafeToPosition(14, DRIVE_SPEED);
 
-            sleep(500);
+            liftup(2.15, .9);
 
-            Spinner.setPower(-.4);
-            sleep(2500);
-            Spinner.setPower(0);
+            gyroTurn(TURN_SPEED, 105);
 
-            gyroTurn(TURN_SPEED, 2);
+            gyroDrive(DRIVE_SPEED, -.7, -.7,-.7,-.7,105);
 
-            strafeToPosition(-24, DRIVE_SPEED);
-
-            gyroTurn(TURN_SPEED,8);
-
-            liftup(2.35,.3);
-
-            gyroDrive(.2, -13, -13, -13, -13,8);
-
-            liftout(15,.9);
-
-            sleep(500);
+            liftout(23, 1);
 
             open();
 
-            sleep(1000);
-
-            liftout(-7,.8);
-
-            gyroDrive(.4,18,18,18,18,8);
-
-            liftup(-2, .2);
+            gyroDrive(.6,10.5,10.5,10.5,10.5,90);
 
             close();
 
-            strafeToPosition(8, .4);
+            liftout(-13, 1);
+
+            liftup(-2, .9);
+
+            gyroTurn(TURN_SPEED, -180);
+
+            strafeToPosition(2.7,.7);
+
+            gyroDrive(.7, -24, -24, -24, -24,-180);
+
+            strafeToPosition(-16, .7);
+
+            gyroTurn(TURN_SPEED, 270);
+
+            strafeToPosition(-17, .7);
         }
     }
 

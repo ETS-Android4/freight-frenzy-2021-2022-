@@ -88,16 +88,22 @@ public class RedDuckDetector {
             //opMode.telemetry.addData("boxLeft: ", left_avg);
             if(left_avg <= center_avg && left_avg <= right_avg){
                 boxLeft = true;
+                boxCenter = false;
+                boxRight = false;
             }
 
             //opMode.telemetry.addData("boxCenter: ", center_avg);
             if(center_avg <= left_avg && center_avg <= right_avg){
+                boxLeft = false;
                 boxCenter = true;
+                boxRight = false;
             }
 
             //opMode.telemetry.addData("boxRight: ", right_avg);
             //opMode.telemetry.update();
             if(right_avg <= left_avg && right_avg <= center_avg){
+                boxLeft = false;
+                boxCenter = false;
                 boxRight = true;
             }
 
